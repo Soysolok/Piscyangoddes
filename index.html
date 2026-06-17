@@ -1,0 +1,1524 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>TuCuentaOnly — Review @piscyangoddes</title>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,400&display=swap" rel="stylesheet">
+<style>
+:root {
+  --pink: #d7b3cd;
+  --peach: #ffb997;
+  --purple: #89547a;
+  --purple-dark: #6b3d5e;
+  --purple-light: #f5eaf2;
+  --bg: #fdf6fa;
+  --white: #ffffff;
+  --text: #2d1f2a;
+  --text-light: #8a6a80;
+  --border: #eddde8;
+  --gradient: linear-gradient(135deg, #89547a 0%, #d7b3cd 55%, #ffb997 100%);
+  --shadow: 0 4px 20px rgba(137,84,122,0.10);
+  --shadow-hover: 0 8px 30px rgba(137,84,122,0.18);
+  --radius: 16px;
+  --radius-sm: 10px;
+}
+*{margin:0;padding:0;box-sizing:border-box;}
+body{font-family:'Montserrat',sans-serif;background:var(--bg);color:var(--text);line-height:1.65;overflow-x:hidden;}
+a{text-decoration:none;color:inherit;}
+
+/* PROGRESS BAR */
+#progress-bar{position:fixed;top:0;left:0;height:4px;background:var(--gradient);z-index:9999;width:0%;transition:width .1s linear;border-radius:0 2px 2px 0;}
+
+/* ======================== PASSWORD ======================== */
+#password-screen{position:fixed;inset:0;background:linear-gradient(145deg,#1e0f1a 0%,#89547a 60%,#d7b3cd 100%);display:flex;align-items:center;justify-content:center;z-index:10000;padding:20px;}
+.pwd-box{background:rgba(255,255,255,0.10);backdrop-filter:blur(24px);-webkit-backdrop-filter:blur(24px);border:1px solid rgba(255,255,255,0.18);border-radius:24px;padding:48px 40px;text-align:center;max-width:420px;width:100%;}
+.pwd-logo{font-size:11px;font-weight:800;letter-spacing:3.5px;color:rgba(255,255,255,0.95);text-transform:uppercase;margin-bottom:4px;}
+.pwd-sub{font-size:10px;color:rgba(255,255,255,0.5);letter-spacing:1px;margin-bottom:36px;}
+.pwd-emoji{font-size:40px;margin-bottom:12px;}
+.pwd-title{font-size:20px;font-weight:800;color:white;margin-bottom:8px;}
+.pwd-desc{font-size:13px;color:rgba(255,255,255,0.65);margin-bottom:28px;line-height:1.5;}
+.pwd-input{width:100%;padding:15px 20px;border-radius:12px;border:1.5px solid rgba(255,255,255,0.25);background:rgba(255,255,255,0.12);color:white;font-family:'Montserrat',sans-serif;font-size:16px;font-weight:600;text-align:center;letter-spacing:3px;outline:none;margin-bottom:14px;transition:border .2s;}
+.pwd-input::placeholder{color:rgba(255,255,255,0.4);letter-spacing:1px;font-size:13px;}
+.pwd-input:focus{border-color:rgba(255,255,255,0.55);background:rgba(255,255,255,0.18);}
+.pwd-btn{width:100%;padding:15px;border-radius:12px;border:none;background:white;color:var(--purple);font-family:'Montserrat',sans-serif;font-size:13px;font-weight:800;letter-spacing:1.5px;cursor:pointer;transition:all .2s;text-transform:uppercase;}
+.pwd-btn:hover{transform:translateY(-2px);box-shadow:0 8px 28px rgba(0,0,0,0.3);}
+.pwd-error{color:#ffb997;font-size:12px;font-weight:600;margin-top:12px;display:none;}
+
+/* ======================== LAYOUT ======================== */
+#main-content{display:none;}
+.site-header{background:white;border-bottom:1px solid var(--border);padding:14px 28px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:4px;z-index:200;box-shadow:0 2px 16px rgba(137,84,122,0.07);}
+.header-logo{display:flex;align-items:center;gap:12px;}
+.logo-mark{width:38px;height:38px;background:var(--gradient);border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:18px;}
+.logo-name{font-size:11px;font-weight:800;letter-spacing:2.5px;color:var(--purple);text-transform:uppercase;}
+.logo-handle{font-size:10px;color:var(--text-light);font-weight:500;margin-top:1px;}
+.header-right{display:flex;align-items:center;gap:12px;}
+.header-badge{background:var(--purple-light);color:var(--purple);font-size:11px;font-weight:700;padding:6px 14px;border-radius:20px;}
+
+/* LANG TOGGLE */
+.lang-toggle{display:flex;background:var(--purple-light);border-radius:30px;padding:4px;gap:2px;}
+.lang-btn{padding:5px 14px;border-radius:20px;border:none;font-family:'Montserrat',sans-serif;font-size:11px;font-weight:700;cursor:pointer;transition:all .2s;background:transparent;color:var(--text-light);}
+.lang-btn.active{background:var(--purple);color:white;}
+
+/* MAIN LAYOUT */
+.layout{display:flex;}
+.sidebar{width:255px;background:white;border-right:1px solid var(--border);padding:20px 0;position:sticky;top:61px;height:calc(100vh - 61px);overflow-y:auto;flex-shrink:0;scrollbar-width:thin;scrollbar-color:var(--pink) transparent;}
+.sidebar-label{font-size:9px;font-weight:800;letter-spacing:2px;color:var(--text-light);text-transform:uppercase;padding:0 18px 10px;}
+.nav-item{display:flex;align-items:center;gap:10px;padding:10px 18px;cursor:pointer;transition:all .2s;border-left:3px solid transparent;color:var(--text);font-size:12px;font-weight:600;}
+.nav-item:hover{background:var(--purple-light);border-left-color:var(--pink);}
+.nav-item.active{background:var(--purple-light);border-left-color:var(--purple);color:var(--purple);}
+.nav-icon{font-size:15px;flex-shrink:0;}
+.nav-num{font-size:9px;color:var(--text-light);margin-left:auto;font-weight:700;}
+
+.main{flex:1;padding:36px 44px;min-width:0;}
+
+/* ======================== SECTIONS ======================== */
+.section{margin-bottom:72px;scroll-margin-top:80px;}
+.section-header{display:flex;align-items:center;gap:16px;margin-bottom:28px;}
+.section-icon-wrap{width:50px;height:50px;background:var(--gradient);border-radius:14px;display:flex;align-items:center;justify-content:center;font-size:24px;flex-shrink:0;}
+.sec-num{font-size:9px;font-weight:800;letter-spacing:2px;color:var(--text-light);text-transform:uppercase;}
+.sec-title{font-size:22px;font-weight:900;color:var(--purple-dark);line-height:1.2;}
+.sec-divider{height:3px;background:var(--gradient);border-radius:2px;margin-bottom:28px;}
+
+/* CARDS */
+.card{background:white;border-radius:var(--radius);padding:24px;margin-bottom:16px;box-shadow:var(--shadow);border:1px solid var(--border);}
+.card-title{font-size:11px;font-weight:800;color:var(--purple);text-transform:uppercase;letter-spacing:1.5px;margin-bottom:16px;display:flex;align-items:center;gap:8px;}
+.card p{font-size:14px;color:var(--text);line-height:1.7;margin-bottom:10px;}
+.card p:last-child{margin-bottom:0;}
+
+/* BADGES */
+.badge{display:inline-block;padding:3px 10px;border-radius:20px;font-size:11px;font-weight:700;}
+.badge-green{background:#d4f4e0;color:#1a7a45;}
+.badge-red{background:#fde8e8;color:#c0392b;}
+.badge-purple{background:var(--purple-light);color:var(--purple);}
+.badge-peach{background:#fff0e8;color:#c85a2a;}
+.badge-gray{background:#f0ede8;color:#6b5a50;}
+
+/* INFO / WARNING BOXES */
+.info-box{background:var(--purple-light);border-left:4px solid var(--purple);border-radius:0 var(--radius-sm) var(--radius-sm) 0;padding:14px 18px;margin:12px 0;font-size:13px;color:var(--purple-dark);line-height:1.6;}
+.warning-box{background:#fff8e8;border-left:4px solid #f0a500;border-radius:0 var(--radius-sm) var(--radius-sm) 0;padding:14px 18px;margin:12px 0;font-size:13px;color:#7a5200;line-height:1.6;}
+
+/* TABLES */
+.data-table{width:100%;border-collapse:collapse;font-size:13px;}
+.data-table th{background:var(--purple);color:white;padding:11px 16px;text-align:left;font-size:10px;letter-spacing:.5px;font-weight:700;}
+.data-table td{padding:11px 16px;border-bottom:1px solid var(--border);font-weight:500;}
+.data-table tr:last-child td{border-bottom:none;}
+.data-table tr:nth-child(even) td{background:#fdf6fa;}
+
+/* PROBLEM LIST */
+.problem-list{list-style:none;}
+.problem-item{display:flex;align-items:flex-start;gap:12px;padding:12px 0;border-bottom:1px solid var(--border);font-size:14px;}
+.problem-item:last-child{border-bottom:none;}
+.problem-icon{font-size:18px;flex-shrink:0;margin-top:1px;}
+
+/* FUNNEL */
+.funnel{display:flex;flex-direction:column;align-items:center;gap:3px;margin:20px 0;}
+.funnel-row{width:100%;display:flex;justify-content:center;}
+.funnel-step{color:white;text-align:center;padding:13px 24px;font-weight:700;font-size:13px;line-height:1.3;width:var(--w);}
+.funnel-step:nth-child(1){--w:100%;background:var(--purple-dark);border-radius:10px 10px 0 0;}
+.funnel-step:nth-child(2){--w:88%;background:var(--purple);}
+.funnel-step:nth-child(3){--w:76%;background:#a86a96;}
+.funnel-step:nth-child(4){--w:64%;background:var(--pink);}
+.funnel-step:nth-child(5){--w:52%;background:var(--peach);color:var(--purple-dark);border-radius:0 0 10px 10px;}
+
+/* SCRIPT CARDS */
+.script-card{background:white;border-radius:var(--radius-sm);border:1px solid var(--border);overflow:hidden;margin-bottom:12px;box-shadow:0 2px 8px rgba(137,84,122,0.06);}
+.script-header{background:var(--purple-light);padding:10px 16px;display:flex;align-items:center;justify-content:space-between;}
+.script-label{font-size:11px;font-weight:800;color:var(--purple);letter-spacing:1px;text-transform:uppercase;}
+.script-tag{font-size:10px;background:var(--purple);color:white;padding:3px 10px;border-radius:20px;font-weight:700;}
+.script-body{padding:16px 16px 12px;}
+.lang-block{margin-bottom:12px;}
+.lang-block:last-child{margin-bottom:0;}
+.lang-flag{font-size:11px;font-weight:700;color:var(--text-light);margin-bottom:6px;display:flex;align-items:center;gap:5px;}
+.script-text{font-size:14px;color:var(--text);line-height:1.65;font-style:italic;background:var(--bg);padding:10px 14px;border-radius:8px;margin-bottom:6px;}
+.copy-btn{background:var(--purple-light);color:var(--purple);border:none;padding:5px 14px;border-radius:20px;font-family:'Montserrat',sans-serif;font-size:10px;font-weight:800;cursor:pointer;transition:all .2s;letter-spacing:.5px;text-transform:uppercase;}
+.copy-btn:hover{background:var(--purple);color:white;}
+.copy-btn.copied{background:#d4f4e0;color:#1a7a45;}
+
+/* LANG VISIBILITY */
+body.lang-en .lang-es{display:none;}
+body.lang-es .lang-en{display:none;}
+
+/* BLOCK TABS */
+.block-tabs{display:flex;gap:8px;margin-bottom:20px;flex-wrap:wrap;}
+.block-tab{padding:9px 20px;border-radius:30px;border:2px solid var(--border);background:white;font-family:'Montserrat',sans-serif;font-size:12px;font-weight:700;cursor:pointer;transition:all .2s;color:var(--text-light);}
+.block-tab.active{background:var(--purple);border-color:var(--purple);color:white;}
+.block-tab:hover:not(.active){border-color:var(--pink);color:var(--purple);}
+.block-content{display:none;}
+.block-content.active{display:block;}
+
+/* PRICE LADDER */
+.price-ladder{display:flex;align-items:center;gap:6px;flex-wrap:wrap;margin:16px 0;justify-content:center;}
+.price-step{background:white;border:2px solid var(--pink);border-radius:10px;padding:10px 14px;text-align:center;flex:1;min-width:56px;}
+.price-step.current{border-color:var(--purple);background:var(--purple);}
+.price-num{font-size:17px;font-weight:900;color:var(--purple);display:block;}
+.price-step.current .price-num{color:white;}
+.price-lbl{font-size:9px;font-weight:700;color:var(--text-light);letter-spacing:.5px;text-transform:uppercase;}
+.price-step.current .price-lbl{color:rgba(255,255,255,0.8);}
+.price-arrow{color:var(--pink);font-size:18px;font-weight:700;}
+
+/* IRAE */
+.irae-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:16px 0;}
+.irae-card{background:white;border-radius:var(--radius-sm);padding:18px;border:1px solid var(--border);border-top:4px solid;}
+.irae-card.R{border-top-color:#89547a;}
+.irae-card.A{border-top-color:#d7b3cd;}
+.irae-card.I{border-top-color:#ffb997;}
+.irae-card.E{border-top-color:#c85a2a;}
+.irae-letter{font-size:30px;font-weight:900;margin-bottom:6px;}
+.irae-card.R .irae-letter{color:#89547a;}
+.irae-card.A .irae-letter{color:#d7b3cd;}
+.irae-card.I .irae-letter{color:#ffb997;}
+.irae-card.E .irae-letter{color:#c85a2a;}
+.irae-name{font-size:13px;font-weight:800;margin-bottom:6px;color:var(--text);}
+.irae-desc{font-size:12px;color:var(--text-light);line-height:1.55;}
+
+/* SCHEDULE */
+.schedule-table{width:100%;border-collapse:collapse;font-size:13px;}
+.schedule-table th{background:var(--purple);color:white;padding:11px 16px;text-align:left;font-size:10px;letter-spacing:.5px;font-weight:700;}
+.schedule-table td{padding:11px 16px;border-bottom:1px solid var(--border);vertical-align:top;}
+.schedule-table tr:last-child td{border-bottom:none;}
+.time-badge{background:var(--purple-light);color:var(--purple);padding:4px 10px;border-radius:20px;font-weight:700;font-size:11px;white-space:nowrap;display:inline-block;}
+
+/* TOP FANS */
+.fans-grid{display:grid;gap:10px;}
+.fan-row{background:white;border-radius:var(--radius-sm);padding:14px 18px;display:flex;align-items:center;gap:14px;border:1px solid var(--border);}
+.fan-rank{font-size:20px;font-weight:900;color:var(--purple);width:28px;text-align:center;flex-shrink:0;}
+.fan-info{flex:1;}
+.fan-name{font-size:14px;font-weight:700;color:var(--text);}
+.fan-handle{font-size:11px;color:var(--text-light);}
+.fan-amount{font-size:18px;font-weight:900;color:var(--purple-dark);}
+.fan-next{font-size:10px;color:var(--text-light);text-align:right;}
+
+/* LISTS GRID */
+.lists-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:12px;}
+.list-card{background:white;border-radius:var(--radius-sm);padding:16px;border:1px solid var(--border);border-left:4px solid var(--purple);}
+.list-name{font-size:14px;font-weight:800;color:var(--purple-dark);margin-bottom:6px;}
+.list-desc{font-size:12px;color:var(--text-light);line-height:1.5;}
+
+/* RULES */
+.rule-section{margin-bottom:16px;border-radius:var(--radius-sm);overflow:hidden;border:1px solid var(--border);}
+.rule-cat{background:var(--purple);color:white;padding:10px 16px;font-size:11px;font-weight:800;letter-spacing:1.5px;text-transform:uppercase;}
+.rule-list{list-style:none;background:white;}
+.rule-item{padding:11px 16px;border-bottom:1px solid var(--border);font-size:13px;display:flex;gap:10px;align-items:flex-start;}
+.rule-item:last-child{border-bottom:none;}
+.rule-dot{color:var(--purple);font-weight:900;flex-shrink:0;}
+
+/* PROJECTIONS */
+.proj-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin:16px 0;}
+.proj-card{background:white;border-radius:var(--radius-sm);padding:20px;border:1px solid var(--border);text-align:center;}
+.proj-card.highlight{background:var(--gradient);}
+.proj-month{font-size:10px;font-weight:800;color:var(--text-light);text-transform:uppercase;letter-spacing:1px;margin-bottom:8px;}
+.proj-card.highlight .proj-month{color:rgba(255,255,255,0.75);}
+.proj-amount{font-size:26px;font-weight:900;color:var(--purple);}
+.proj-card.highlight .proj-amount{color:white;}
+.proj-range{font-size:11px;color:var(--text-light);margin-top:4px;}
+.proj-card.highlight .proj-range{color:rgba(255,255,255,0.7);}
+
+/* KPI GRID */
+.kpi-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:12px;margin:16px 0;}
+.kpi-card{background:white;border-radius:var(--radius-sm);padding:16px;border:1px solid var(--border);border-top:3px solid var(--purple);}
+.kpi-label{font-size:10px;font-weight:700;color:var(--text-light);text-transform:uppercase;letter-spacing:.5px;margin-bottom:6px;}
+.kpi-value{font-size:18px;font-weight:900;color:var(--purple-dark);}
+.kpi-goal{font-size:11px;color:var(--text-light);margin-top:4px;}
+
+/* FOOTER */
+.footer{background:var(--purple-dark);color:rgba(255,255,255,0.65);text-align:center;padding:32px;font-size:11px;letter-spacing:.5px;}
+.footer strong{color:white;}
+.footer a{color:var(--pink);font-weight:600;}
+
+/* MOBILE NAV */
+.mobile-nav{display:none;position:fixed;bottom:0;left:0;right:0;background:white;border-top:1px solid var(--border);z-index:200;padding:6px 0 8px;}
+.mobile-nav-inner{display:flex;overflow-x:auto;padding:0 12px;gap:4px;scrollbar-width:none;}
+.mobile-nav-inner::-webkit-scrollbar{display:none;}
+.mnav-item{display:flex;flex-direction:column;align-items:center;padding:6px 12px;border-radius:10px;cursor:pointer;white-space:nowrap;flex-shrink:0;color:var(--text-light);}
+.mnav-item.active{background:var(--purple-light);color:var(--purple);}
+.mnav-icon{font-size:17px;}
+.mnav-label{font-size:8px;font-weight:700;margin-top:2px;letter-spacing:.3px;text-transform:uppercase;}
+
+/* CURRENT BIO BOX */
+.bio-box{background:var(--bg);border:1px solid var(--border);border-radius:var(--radius-sm);padding:18px;font-size:14px;line-height:1.8;color:var(--text);position:relative;}
+.bio-box.new{background:var(--purple-light);border-color:var(--purple);}
+.bio-corner{position:absolute;top:10px;right:10px;font-size:10px;font-weight:800;text-transform:uppercase;letter-spacing:1px;}
+.bio-corner.old{color:var(--text-light);}
+.bio-corner.new{color:var(--purple);}
+
+/* RESPONSIVE */
+@media(max-width:900px){
+  .main{padding:24px 20px 110px;}
+  .sidebar{display:none;}
+  .mobile-nav{display:block;}
+  .proj-grid{grid-template-columns:1fr;}
+  .irae-grid{grid-template-columns:1fr;}
+  .header-badge{display:none;}
+  .price-arrow{display:none;}
+  .price-step{min-width:44px;padding:8px 6px;}
+  .price-num{font-size:14px;}
+  .lang-toggle{display:none;}
+}
+@media(max-width:480px){
+  .pwd-box{padding:32px 22px;}
+  .block-tabs{flex-wrap:nowrap;overflow-x:auto;padding-bottom:4px;}
+  .block-tab{flex-shrink:0;}
+  .fans-grid{}
+  .lists-grid{grid-template-columns:1fr 1fr;}
+  .kpi-grid{grid-template-columns:1fr 1fr;}
+}
+</style>
+</head>
+<body>
+
+<div id="progress-bar"></div>
+
+<!-- ==================== PASSWORD ==================== -->
+<div id="password-screen">
+  <div class="pwd-box">
+    <div class="pwd-logo">TuCuentaOnly</div>
+    <div class="pwd-sub">tucuentaof.com · @tucuentaonlyf</div>
+    <div class="pwd-emoji">👑</div>
+    <div class="pwd-title">Review Confidencial</div>
+    <div class="pwd-desc">Ingresá la contraseña para acceder a tu estrategia personalizada de @piscyangoddes</div>
+    <input type="password" class="pwd-input" id="pwd-input" placeholder="Contraseña" onkeydown="if(event.key==='Enter')checkPwd()">
+    <button class="pwd-btn" onclick="checkPwd()">Acceder 👑</button>
+    <div class="pwd-error" id="pwd-error">❌ Contraseña incorrecta. Intentá de nuevo.</div>
+  </div>
+</div>
+
+<!-- ==================== MAIN ==================== -->
+<div id="main-content">
+
+<header class="site-header">
+  <div class="header-logo">
+    <div class="logo-mark">👑</div>
+    <div>
+      <div class="logo-name">TuCuentaOnly</div>
+      <div class="logo-handle">@piscyangoddes · Review Junio 2026</div>
+    </div>
+  </div>
+  <div class="header-right">
+    <div class="lang-toggle">
+      <button class="lang-btn active" id="lb-both" onclick="setLang('both')">🌐 Ambos</button>
+      <button class="lang-btn" id="lb-en" onclick="setLang('en')">🇬🇧 EN</button>
+      <button class="lang-btn" id="lb-es" onclick="setLang('es')">🇦🇷 ES</button>
+    </div>
+    <div class="header-badge">@piscyangoddes</div>
+  </div>
+</header>
+
+<div class="layout">
+
+<!-- SIDEBAR -->
+<nav class="sidebar">
+  <div class="sidebar-label">Secciones</div>
+  <a href="#diagnostico" class="nav-item active" onclick="setActive(this)"><span class="nav-icon">🔍</span><span>Diagnóstico</span><span class="nav-num">01</span></a>
+  <a href="#bio" class="nav-item" onclick="setActive(this)"><span class="nav-icon">📝</span><span>Bio Nueva</span><span class="nav-num">02</span></a>
+  <a href="#welcome" class="nav-item" onclick="setActive(this)"><span class="nav-icon">👋</span><span>Welcome</span><span class="nav-num">03</span></a>
+  <a href="#vault" class="nav-item" onclick="setActive(this)"><span class="nav-icon">🗄️</span><span>Vault</span><span class="nav-num">04</span></a>
+  <a href="#drops" class="nav-item" onclick="setActive(this)"><span class="nav-icon">📤</span><span>Drops + Reddit</span><span class="nav-num">05</span></a>
+  <a href="#masivos" class="nav-item" onclick="setActive(this)"><span class="nav-icon">📨</span><span>Masivos</span><span class="nav-num">06</span></a>
+  <a href="#horario" class="nav-item" onclick="setActive(this)"><span class="nav-icon">🕐</span><span>Horario Diario</span><span class="nav-num">07</span></a>
+  <a href="#scripts" class="nav-item" onclick="setActive(this)"><span class="nav-icon">💬</span><span>Scripts IRAE</span><span class="nav-num">08</span></a>
+  <a href="#drip" class="nav-item" onclick="setActive(this)"><span class="nav-icon">💧</span><span>Drip Method</span><span class="nav-num">09</span></a>
+  <a href="#topfans" class="nav-item" onclick="setActive(this)"><span class="nav-icon">⭐</span><span>Top Fans</span><span class="nav-num">10</span></a>
+  <a href="#feed" class="nav-item" onclick="setActive(this)"><span class="nav-icon">📸</span><span>Feed</span><span class="nav-num">11</span></a>
+  <a href="#listas" class="nav-item" onclick="setActive(this)"><span class="nav-icon">📋</span><span>Listas</span><span class="nav-num">12</span></a>
+  <a href="#reglas" class="nav-item" onclick="setActive(this)"><span class="nav-icon">📏</span><span>Reglas</span><span class="nav-num">13</span></a>
+  <a href="#metricas" class="nav-item" onclick="setActive(this)"><span class="nav-icon">📊</span><span>Métricas</span><span class="nav-num">14</span></a>
+</nav>
+
+<!-- MAIN -->
+<main class="main">
+
+<!-- ==================== 01 DIAGNÓSTICO ==================== -->
+<section class="section" id="diagnostico">
+  <div class="section-header">
+    <div class="section-icon-wrap">🔍</div>
+    <div><div class="sec-num">Sección 01</div><div class="sec-title">Diagnóstico</div></div>
+  </div>
+  <div class="sec-divider"></div>
+
+  <div class="card">
+    <div class="card-title">📊 Métricas Actuales — Últimos 30 días</div>
+    <table class="data-table">
+      <tr><th>Métrica</th><th>Valor</th><th>Estado</th></tr>
+      <tr><td>Ganancias netas (30 días)</td><td><strong>$271.20</strong></td><td><span class="badge badge-green">+52.7%</span></td></tr>
+      <tr><td>Ganancias totales all-time</td><td><strong>$448.79</strong></td><td><span class="badge badge-purple">2 meses</span></td></tr>
+      <tr><td>Ranking global</td><td><strong>Top 22%</strong></td><td><span class="badge badge-purple">↑ Creció</span></td></tr>
+      <tr><td>Fans activos</td><td><strong>321</strong></td><td><span class="badge badge-green">de 352 totales</span></td></tr>
+      <tr><td>Visitas al perfil (30 días)</td><td><strong>5.764</strong></td><td><span class="badge badge-green">+141.3%</span></td></tr>
+      <tr><td>Nuevas suscripciones</td><td><strong>365 nuevas / 174 renov.</strong></td><td><span class="badge badge-green">+339.8%</span></td></tr>
+      <tr><td>Ingresos de masivos</td><td><strong>$0.00</strong></td><td><span class="badge badge-red">Sin sistema</span></td></tr>
+      <tr><td>Ingresos del feed</td><td><strong>$0.00</strong></td><td><span class="badge badge-red">Sin sistema</span></td></tr>
+      <tr><td>Ingresos de mensajes directos</td><td><strong>$79.20</strong></td><td><span class="badge badge-peach">+183%</span></td></tr>
+      <tr><td>Ingresos de propinas</td><td><strong>$192.00</strong></td><td><span class="badge badge-green">Orgánicas</span></td></tr>
+      <tr><td>Historias publicadas</td><td><strong>45</strong></td><td><span class="badge badge-gray">$0 ingresos</span></td></tr>
+      <tr><td>Países principales</td><td><strong>USA · UK · España</strong></td><td><span class="badge badge-purple">Audiencia premium</span></td></tr>
+    </table>
+  </div>
+
+  <div class="card">
+    <div class="card-title">🔻 Análisis del Funnel</div>
+    <p>Tu tráfico está muy bien — 8.180 visitas all-time y creciendo fuerte. El problema es que el embudo se rompe después de la suscripción: los fans entran, se suscriben gratis y casi ninguno compra nada porque no existe un sistema que los lleve a gastar.</p>
+    <div class="funnel" style="margin-top:20px;">
+      <div class="funnel-step" style="width:100%;background:#89547a;border-radius:10px 10px 0 0;padding:13px 24px;text-align:center;color:white;font-weight:700;font-size:13px;">🌐 Tráfico — 5.764 visitas/mes (+141%)</div>
+      <div class="funnel-step" style="width:88%;background:#9e6490;padding:12px 24px;text-align:center;color:white;font-weight:700;font-size:13px;">📥 Suscriptores — 321 fans activos (gratis)</div>
+      <div class="funnel-step" style="width:74%;background:#d7b3cd;padding:12px 24px;text-align:center;color:#4a2040;font-weight:700;font-size:13px;">👋 Welcome — $9 PPV (conversión baja)</div>
+      <div class="funnel-step" style="width:60%;background:#f0d0e8;padding:12px 24px;text-align:center;color:#4a2040;font-weight:700;font-size:13px;">📨 Masivos — $0 en 30 masivos ❌</div>
+      <div class="funnel-step" style="width:46%;background:#ffb997;border-radius:0 0 10px 10px;padding:12px 24px;text-align:center;color:#4a2040;font-weight:700;font-size:13px;">💰 Compradores — 7 fans orgánicos ($448 total)</div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-title">🚨 Problemas Identificados</div>
+    <ul class="problem-list">
+      <li class="problem-item"><span class="problem-icon">❌</span><span><strong>Masivos sin sistema:</strong> 30 mensajes en el mes generaron $0. Todos son GFE genérico, sin PPV real, sin estructura de bloques, sin segmentación de fans.</span></li>
+      <li class="problem-item"><span class="problem-icon">❌</span><span><strong>Feed abandonado:</strong> 27 posts en 2 meses (deberían ser ~120). $0 en ventas del feed. No existe como canal de calentamiento.</span></li>
+      <li class="problem-item"><span class="problem-icon">❌</span><span><strong>Sin listas de fans:</strong> Mandás todo a todos sin distinción. No sabés quién compró, quién está en qué escalón del Drip ni a quién trabajar en DM.</span></li>
+      <li class="problem-item"><span class="problem-icon">❌</span><span><strong>Contenido ajeno en el vault:</strong> Hay material con marca de agua de otra creadora (@velvetrocio). Hay que limpiarlo urgente — si algún fan lo reconoce destruye tu credibilidad.</span></li>
+      <li class="problem-item"><span class="problem-icon">❌</span><span><strong>Contenido vainilla en cuenta femdom:</strong> La bio y el welcome venden "Goddess/Mistress" pero el vault y los masivos no coinciden con esa promesa. Eso mata la conversión del PPV.</span></li>
+      <li class="problem-item"><span class="problem-icon">❌</span><span><strong>Top fans sin trabajar:</strong> Thunderbeltt, Fe Pa y Trin ya gastaron $38-$48 solos. No estás empujando activamente a ninguno. Ese dinero es tuyo si los contactás.</span></li>
+      <li class="problem-item"><span class="problem-icon">❌</span><span><strong>Tráfico concentrado en una sola fuente:</strong> Un solo grupo de drop y Reddit recién retomado. Si el grupo se cae, se corta el tráfico.</span></li>
+      <li class="problem-item"><span class="problem-icon">⚠️</span><span><strong>Welcome sin segmentación:</strong> El welcome no tiene pregunta de clasificación, así que no podés saber qué tipo de fan es cada uno ni armar listas desde el primer mensaje.</span></li>
+    </ul>
+  </div>
+</section>
+
+<!-- ==================== 02 BIO ==================== -->
+<section class="section" id="bio">
+  <div class="section-header">
+    <div class="section-icon-wrap">📝</div>
+    <div><div class="sec-num">Sección 02</div><div class="sec-title">Bio Nueva</div></div>
+  </div>
+  <div class="sec-divider"></div>
+
+  <div class="card">
+    <div class="card-title">❌ Bio Actual — Problemas</div>
+    <div class="bio-box">
+      <span class="bio-corner old">ACTUAL</span>
+      <p>I am Ana 💋, your mommy and goddess❤️ I m Latina 🍇</p>
+      <p>I your misstres of SPH / JOI / CEI / Cuckold / Keyholder / Humiliation / Teaser and more...</p>
+      <p>Just order my menu😺</p>
+      <p>XXXXXXXXXXXXXXXXXXXXXXXXXXXXX</p>
+      <p>❤️ MISTRESS WITH BIG BOOTY 🍑<br>🪄 fetish variety 🦶<br>📷 CUSTOMS/ VC/ SEXTING 🤩</p>
+    </div>
+    <ul class="problem-list" style="margin-top:12px;">
+      <li class="problem-item"><span class="problem-icon">❌</span><span>"Mommy" mezcla GFE con femdom y confunde el personaje de Goddess.</span></li>
+      <li class="problem-item"><span class="problem-icon">❌</span><span>"I your misstres" — inglés roto que quita autoridad al personaje.</span></li>
+      <li class="problem-item"><span class="problem-icon">❌</span><span>"Just order my menu" apunta a algo que no existe en el perfil.</span></li>
+      <li class="problem-item"><span class="problem-icon">❌</span><span>No tiene CTA concreto que lleve a la suscripción.</span></li>
+      <li class="problem-item"><span class="problem-icon">❌</span><span>No menciona foot worship, que ya validamos como fetiche con demanda real (Throne).</span></li>
+    </ul>
+  </div>
+
+  <div class="card">
+    <div class="card-title">✅ Bio Nueva</div>
+    <div class="bio-box new">
+      <span class="bio-corner new">NUEVA</span>
+      <p>👑 GODDESS ANA 👑<br>
+      Your Latina Mistress with the ass that owns your mind 🍑🧠</p>
+      <br>
+      <p>I'm not your girlfriend. I'm the woman you kneel for.</p>
+      <p>Mistress of SPH / JOI / CEI / Cuckold / Keyholder / Humiliation / Foot Worship &amp; more 🐾👠</p>
+      <br>
+      <p>Prove your devotion. Earn my attention.</p>
+      <br>
+      <p>🎁 Tributes &amp; gifts always welcome<br>
+      📸 Customs / VC / Sexting available</p>
+      <br>
+      <p>👇 Subscribe now — your training begins the moment you do 🔒</p>
+    </div>
+    <button class="copy-btn" style="margin-top:12px;" onclick="copyEl(this,'bio-new-text')">Copiar Bio</button>
+    <textarea id="bio-new-text" style="position:absolute;opacity:0;pointer-events:none;">👑 GODDESS ANA 👑
+Your Latina Mistress with the ass that owns your mind 🍑🧠
+
+I'm not your girlfriend. I'm the woman you kneel for.
+Mistress of SPH / JOI / CEI / Cuckold / Keyholder / Humiliation / Foot Worship & more 🐾👠
+
+Prove your devotion. Earn my attention.
+
+🎁 Tributes & gifts always welcome
+📸 Customs / VC / Sexting available
+
+👇 Subscribe now — your training begins the moment you do 🔒</textarea>
+    <div class="info-box" style="margin-top:12px;">
+      <strong>Por qué funciona:</strong> "Prove your devotion. Earn my attention" actúa como filtro — aleja al fan de GFE genérica y atrae al que busca dinámica de poder. El CTA directo ("Subscribe now") conecta inmediatamente con el welcome y el PPV de $9.
+    </div>
+  </div>
+</section>
+
+<!-- ==================== 03 WELCOME ==================== -->
+<section class="section" id="welcome">
+  <div class="section-header">
+    <div class="section-icon-wrap">👋</div>
+    <div><div class="sec-num">Sección 03</div><div class="sec-title">Welcome Message</div></div>
+  </div>
+  <div class="sec-divider"></div>
+
+  <div class="card">
+    <div class="card-title">📐 Estructura del Welcome</div>
+    <table class="data-table">
+      <tr><th>Elemento</th><th>Detalle</th></tr>
+      <tr><td>Vista previa gratuita</td><td>1 foto — la del pie/sole (femdom-coded, activa el fetiche)</td></tr>
+      <tr><td>Contenido bloqueado</td><td>3 fotos + 1 video de 5seg — TODO bloqueado a <strong>$9</strong></td></tr>
+      <tr><td>Segmentación</td><td>Pregunta 1️⃣/2️⃣ → arma listas Dominante/Guiado desde el primer mensaje</td></tr>
+      <tr><td>Precio psicológico</td><td>$9 (charm pricing, primer escalón del Drip Method)</td></tr>
+    </table>
+  </div>
+
+  <div class="card">
+    <div class="card-title">✅ Welcome Message Nuevo</div>
+    <div class="bio-box new">
+      <p><em>[Vista previa gratuita: 1 foto — pie/sole]</em></p>
+      <br>
+      <p>Welcome, pet 🐾<br>
+      I am Ana — your Goddess, and from now on, the only woman who matters.</p>
+      <br>
+      <p>Here's a taste of what's waiting for you... but remember, nothing is free. Everything you get from me, you earn 👑</p>
+      <br>
+      <p>Before we begin, tell me what you are:<br>
+      1️⃣ I already know how to obey<br>
+      2️⃣ I need my Goddess to guide me</p>
+      <br>
+      <p>This is what obedience looks like. Unlock it 🔒</p>
+      <br>
+      <p><em>[Bloqueado a $9: 3 fotos + video 5seg]</em></p>
+    </div>
+    <button class="copy-btn" style="margin-top:12px;" onclick="copyEl(this,'welcome-text')">Copiar Welcome</button>
+    <textarea id="welcome-text" style="position:absolute;opacity:0;pointer-events:none;">Welcome, pet 🐾
+I am Ana — your Goddess, and from now on, the only woman who matters.
+
+Here's a taste of what's waiting for you... but remember, nothing is free. Everything you get from me, you earn 👑
+
+Before we begin, tell me what you are:
+1️⃣ I already know how to obey
+2️⃣ I need my Goddess to guide me
+
+This is what obedience looks like. Unlock it 🔒</textarea>
+    <div class="info-box" style="margin-top:12px;">
+      La pregunta 1️⃣/2️⃣ no es solo inmersión — te permite segmentar fans en listas (Dominante/Guiado) desde el primer mensaje sin ningún trabajo extra.
+    </div>
+  </div>
+</section>
+
+<!-- ==================== 04 VAULT ==================== -->
+<section class="section" id="vault">
+  <div class="section-header">
+    <div class="section-icon-wrap">🗄️</div>
+    <div><div class="sec-num">Sección 04</div><div class="sec-title">Vault / Contenido</div></div>
+  </div>
+  <div class="sec-divider"></div>
+
+  <div class="warning-box">⚠️ <strong>Acción urgente:</strong> Tenés contenido con marca de agua de @velvetrocio en tu vault. Hay que limpiarlo antes de cualquier otra cosa. Si un fan lo reconoce, destruye tu credibilidad de Goddess instantáneamente.</div>
+
+  <div class="card">
+    <div class="card-title">🗂️ Nueva Organización del Vault</div>
+    <div class="lists-grid">
+      <div class="list-card"><div class="list-name">👠 Pies / Worship</div><div class="list-desc">Fotos y videos de pies. Con tacos, descalza, plantas, dedos. Prioridad para producir.</div></div>
+      <div class="list-card"><div class="list-name">🎙️ Audios JOI / CEI</div><div class="list-desc">Instrucciones de voz, countdowns, comandos. 1-3 min cada uno. Alto ticket.</div></div>
+      <div class="list-card"><div class="list-name">👑 Dominante</div><div class="list-desc">Arneses, cuero, poses de control, miradas. Reencuadrar con texto femdom.</div></div>
+      <div class="list-card"><div class="list-name">🔇 Íntimo (switch)</div><div class="list-desc">Contenido vainilla. Se reserva para fase E de enslavement, no para vender el personaje principal.</div></div>
+      <div class="list-card"><div class="list-name">💨 Fart Fetish</div><div class="list-desc">Micro-nicho premium. Solo audios. Exclusivo — no va en masivos ni en feed. Mínimo $20.</div></div>
+      <div class="list-card"><div class="list-name">🎁 Throne</div><div class="list-desc">Contenido especial para gifters y fans del leaderboard. Exclusividad máxima.</div></div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-title">📅 Plan de Contenido Nuevo</div>
+    <table class="data-table">
+      <tr><th>Frecuencia</th><th>Tipo de contenido</th><th>Por qué</th></tr>
+      <tr><td>3x por semana</td><td>Fotos de pies (8-10 por sesión)</td><td>Fetiche validado por Throne + masivos</td></tr>
+      <tr><td>2-3x por semana</td><td>Audios JOI / CEI / instrucciones (1-3 min)</td><td>Alto ticket, bajo costo de producción</td></tr>
+      <tr><td>Cuando haya oportunidad</td><td>Audios fart fetish</td><td>Micro-nicho premium, casi sin competencia latina</td></tr>
+      <tr><td>Semanal</td><td>Foto especial con tacos del Throne gift</td><td>Activa competencia de tributos públicamente</td></tr>
+    </table>
+    <div class="info-box" style="margin-top:12px;">Los tacos leopardo que recibiste por Throne son un asset de contenido. Usarlos y mencionarlo ("wearing the gift from my pet...") valida al que regaló y presiona a los demás a hacer lo mismo.</div>
+  </div>
+</section>
+
+<!-- ==================== 05 DROPS ==================== -->
+<section class="section" id="drops">
+  <div class="section-header">
+    <div class="section-icon-wrap">📤</div>
+    <div><div class="sec-num">Sección 05</div><div class="sec-title">Drops + Reddit</div></div>
+  </div>
+  <div class="sec-divider"></div>
+
+  <div class="card">
+    <div class="card-title">🖼️ Drops de Collage</div>
+    <p>Los collages los arma la host, así que tu trabajo es elegir bien en qué grupos participás. La regla es simple: <strong>solo drops femdom, fetish o kinky</strong>. Si el grupo mezcla estilos, no estar. La coherencia del tráfico que entra importa más que el volumen.</p>
+    <div class="warning-box" style="margin-top:12px;">Los 2 collages que tenés en el feed son drops — eso mezcla tu perfil con contenido de promo. Sacalos del feed. El feed es solo para tu contenido propio.</div>
+    <div class="info-box">Horario de drops: entre las 18hs y las 23hs (hora Argentina) cuando la audiencia USA/UK está activa.</div>
+  </div>
+
+  <div class="card">
+    <div class="card-title">🟠 Reddit — Estrategia</div>
+    <table class="data-table">
+      <tr><th>Estado actual</th><th>Detalle</th></tr>
+      <tr><td>Cuenta</td><td>u/readhead66 — 1 semana de vida, 336 karma</td></tr>
+      <tr><td>Estrategia actual</td><td>Comentar en SFW para acumular karma ✅ Correcto</td></tr>
+      <tr><td>Problema</td><td>Karma todavía bajo para postear en NSFW premium</td></tr>
+    </table>
+    <div style="margin-top:16px;">
+      <div class="card-title">📌 Subs Target (cuando tengas karma suficiente)</div>
+      <div style="display:flex;flex-wrap:wrap;gap:8px;margin-top:8px;">
+        <span class="badge badge-purple">r/findommes</span>
+        <span class="badge badge-purple">r/FootFetish</span>
+        <span class="badge badge-purple">r/Latinafeet</span>
+        <span class="badge badge-purple">r/FemdomCommunity</span>
+        <span class="badge badge-purple">r/footdommes</span>
+        <span class="badge badge-purple">r/femdomcaptions</span>
+        <span class="badge badge-peach">r/fart (fetish)</span>
+      </div>
+      <div class="warning-box" style="margin-top:12px;">Nada de subs genéricos de Latina o GFE. Ese tráfico no convierte para el posicionamiento de Goddess que estamos construyendo.</div>
+    </div>
+    <div style="margin-top:16px;">
+      <div class="card-title">📝 Bio de Reddit (actualizar)</div>
+      <div class="bio-box new">
+        <p>👑 Goddess Ana · Your Latina Mistress<br>
+        Huge ass 🍑 · Foot worship 👠 · Fetish specialist 🐾<br>
+        worship me ❤️ · i love FETISHES 🥰<br>
+        🔒 onlyfans.com/piscyangoddes</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== 06 MASIVOS ==================== -->
+<section class="section" id="masivos">
+  <div class="section-header">
+    <div class="section-icon-wrap">📨</div>
+    <div><div class="sec-num">Sección 06</div><div class="sec-title">50 Masivos en 4 Bloques</div></div>
+  </div>
+  <div class="sec-divider"></div>
+
+  <div class="card">
+    <div class="card-title">⏰ Horario de Envío (hora Argentina)</div>
+    <table class="data-table">
+      <tr><th>Bloque</th><th>Horario ARG</th><th>Equivale a</th><th>Tipo</th></tr>
+      <tr><td>Wake Up</td><td><span class="badge badge-purple">10:00am</span></td><td>8am EST / 1pm GMT</td><td>Solo texto</td></tr>
+      <tr><td>Contexto</td><td><span class="badge badge-purple">3:00pm – 8:00pm</span></td><td>1pm–6pm EST</td><td>Foto SFW + poll</td></tr>
+      <tr><td>PPV Wave</td><td><span class="badge badge-purple">10:00pm – 11:30pm</span></td><td>8pm–9:30pm EST</td><td>Contenido bloqueado</td></tr>
+      <tr><td>Buenas Noches</td><td><span class="badge badge-purple">1:00am</span></td><td>11pm EST</td><td>Texto + voice note</td></tr>
+    </table>
+  </div>
+
+  <div class="block-tabs">
+    <button class="block-tab active" onclick="showBlock('b1',this)">🌅 Wake Up (10)</button>
+    <button class="block-tab" onclick="showBlock('b2',this)">☀️ Contexto (20)</button>
+    <button class="block-tab" onclick="showBlock('b3',this)">🌙 PPV Wave (10)</button>
+    <button class="block-tab" onclick="showBlock('b4',this)">🌛 Buenas Noches (10)</button>
+  </div>
+
+  <!-- BLOQUE 1 -->
+  <div class="block-content active" id="b1">
+    <div class="info-box">Solo texto — sin foto, sin PPV. El objetivo es arrancar el día en la cabeza del fan.</div>
+    <div id="b1-scripts"></div>
+  </div>
+
+  <!-- BLOQUE 2 -->
+  <div class="block-content" id="b2">
+    <div class="info-box">Con foto SFW + provocación, o poll. 3 envíos distribuidos entre 3pm y 8pm ARG.</div>
+    <div id="b2-scripts"></div>
+  </div>
+
+  <!-- BLOQUE 3 -->
+  <div class="block-content" id="b3">
+    <div class="info-box">Contenido bloqueado. <strong>Siempre contexto antes del candado</strong> — nunca solo 🔒. 2 envíos: 10pm y 11:30pm ARG.</div>
+    <div id="b3-scripts"></div>
+  </div>
+
+  <!-- BLOQUE 4 -->
+  <div class="block-content" id="b4">
+    <div class="info-box">Texto suave o voice note. Puede incluir PPV de audio a $9 los días que haya contenido nuevo.</div>
+    <div id="b4-scripts"></div>
+  </div>
+</section>
+
+<!-- ==================== 07 HORARIO ==================== -->
+<section class="section" id="horario">
+  <div class="section-header">
+    <div class="section-icon-wrap">🕐</div>
+    <div><div class="sec-num">Sección 07</div><div class="sec-title">Horario Diario</div></div>
+  </div>
+  <div class="sec-divider"></div>
+
+  <div class="card">
+    <div class="card-title">🌅 Mañana</div>
+    <table class="schedule-table">
+      <tr><th>Hora ARG</th><th>Acción</th></tr>
+      <tr><td><span class="time-badge">9:00am</span></td><td>Revisás DMs nocturnos. Respondés mensajes pendientes y empujás upsells a quienes compraron de noche.</td></tr>
+      <tr><td><span class="time-badge">10:00am</span></td><td><strong>Wake Up masivo</strong> — Bloque 1, solo texto. Hook de Goddess para arrancar el día en su cabeza.</td></tr>
+      <tr><td><span class="time-badge">10:30am</span></td><td><strong>1er post del feed</strong> — foto dominante o pies, nunca explícita.</td></tr>
+      <tr><td><span class="time-badge">11:00am</span></td><td><strong>1-2 Stories</strong> — mismo contenido del feed o behind the scenes.</td></tr>
+    </table>
+  </div>
+
+  <div class="card">
+    <div class="card-title">🌞 Tarde</div>
+    <table class="schedule-table">
+      <tr><th>Hora ARG</th><th>Acción</th></tr>
+      <tr><td><span class="time-badge">2:00pm</span></td><td><strong>Sesión de contenido</strong> (3x/semana) — fotos de pies, audios JOI/CEI, reencuadre de fotos vainilla con caption femdom.</td></tr>
+      <tr><td><span class="time-badge">3:00pm</span></td><td><strong>Contexto masivo con foto</strong> — Bloque 2. Foto SFW dominante + pregunta provocadora.</td></tr>
+      <tr><td><span class="time-badge">4:30pm</span></td><td>Revisás DMs. Respondés, identificás top spenders, empujás upsells a quienes abrieron el masivo de las 3pm.</td></tr>
+      <tr><td><span class="time-badge">5:30pm</span></td><td><strong>2do post del feed</strong> — tipo distinto al de la mañana.</td></tr>
+      <tr><td><span class="time-badge">6:00pm</span></td><td><strong>Poll masivo</strong> — Bloque 2. Encuesta de segmentación/calentamiento.</td></tr>
+    </table>
+  </div>
+
+  <div class="card">
+    <div class="card-title">🌆 Noche Temprana</div>
+    <table class="schedule-table">
+      <tr><th>Hora ARG</th><th>Acción</th></tr>
+      <tr><td><span class="time-badge">7:00pm</span></td><td>Drops activos. La host los maneja — vos confirmás que participás en collages femdom ese día.</td></tr>
+      <tr><td><span class="time-badge">8:00pm</span></td><td><strong>3er Contexto masivo</strong> — Bloque 2. Calentamiento previo al PPV Wave.</td></tr>
+      <tr><td><span class="time-badge">9:00pm</span></td><td><strong>Chateo activo</strong> — Prioridad: fans que respondieron polls, que abrieron masivos y top spenders. Upsells en DM.</td></tr>
+    </table>
+  </div>
+
+  <div class="card">
+    <div class="card-title">🌙 Noche</div>
+    <table class="schedule-table">
+      <tr><th>Hora ARG</th><th>Acción</th></tr>
+      <tr><td><span class="time-badge">10:00pm</span></td><td><strong>PPV Wave 1</strong> — Bloque 3. Peak de compras USA. Siempre contexto antes del 🔒.</td></tr>
+      <tr><td><span class="time-badge">10:30pm</span></td><td>Chateo activo. Fans que abrieron el PPV y no compraron → upsell personalizado en DM.</td></tr>
+      <tr><td><span class="time-badge">11:30pm</span></td><td><strong>PPV Wave 2</strong> — Bloque 3. Contenido distinto al de las 10pm.</td></tr>
+    </table>
+  </div>
+
+  <div class="card">
+    <div class="card-title">🌛 Madrugada</div>
+    <table class="schedule-table">
+      <tr><th>Hora ARG</th><th>Acción</th></tr>
+      <tr><td><span class="time-badge">1:00am</span></td><td><strong>Goodnight masivo</strong> — Bloque 4. Texto + voice note. Los días de audio nuevo → PPV $9.</td></tr>
+      <tr><td><span class="time-badge">1:30am</span></td><td>Última revisión de DMs. Respondés mensajes de fans USA de noche.</td></tr>
+    </table>
+  </div>
+
+  <div class="card">
+    <div class="card-title">📅 Producción de Contenido (semanal)</div>
+    <table class="data-table">
+      <tr><th>Días</th><th>Tipo</th></tr>
+      <tr><td>Lunes / Miércoles / Viernes</td><td>Sesión de fotos — pies, lencería dominante, poses</td></tr>
+      <tr><td>Martes / Jueves</td><td>Grabación de audios — JOI, CEI, instrucciones, fart fetish</td></tr>
+      <tr><td>Sábado noche</td><td>Contenido especial para PPV Wave del fin de semana (viernes noche USA es peak de gasto)</td></tr>
+      <tr><td>Domingo</td><td>Revisión de métricas: qué convirtió, quién compró, a quién trabajar la semana que viene</td></tr>
+    </table>
+    <div class="info-box" style="margin-top:12px;"><strong>Reddit:</strong> Todos los días, 5-10 minutos: comentar en 3-5 posts SFW para seguir acumulando karma. Cuando tengas karma suficiente, 1 post NSFW diario en los subs femdom/feet objetivo.</div>
+  </div>
+</section>
+
+<!-- ==================== 08 SCRIPTS IRAE ==================== -->
+<section class="section" id="scripts">
+  <div class="section-header">
+    <div class="section-icon-wrap">💬</div>
+    <div><div class="sec-num">Sección 08</div><div class="sec-title">Scripts — Método IRAE</div></div>
+  </div>
+  <div class="sec-divider"></div>
+
+  <div class="card">
+    <div class="card-title">❓ ¿Qué es el Método IRAE?</div>
+    <p>IRAE es el modelo de chateo de TuCuentaOnly. Son 4 fases que guían cada conversación desde el primer mensaje hasta convertir al fan en comprador recurrente. El objetivo es que el fan sienta una conexión real antes de que le vendas algo — porque los fans compran cuando sienten, no cuando los presionan.</p>
+    <div class="irae-grid" style="margin-top:16px;">
+      <div class="irae-card R"><div class="irae-letter">R</div><div class="irae-name">Rapport</div><div class="irae-desc">Los primeros 10 mensajes son solo para conectar. Cero precios. Construís el personaje de Goddess. El fan tiene que sentir que sos real y que le prestás atención especial.</div></div>
+      <div class="irae-card A"><div class="irae-letter">A</div><div class="irae-name">Attraction</div><div class="irae-desc">Una vez que hay conexión, guiás la conversación hacia su fetiche. Preguntás, provocás, calentás. Recién acá empezás a mencionar que tenés algo — sin precio todavía.</div></div>
+      <div class="irae-card I"><div class="irae-letter">I</div><div class="irae-name">Implicación</div><div class="irae-desc">Lo acercás al momento de compra con contexto. "Filmé algo que te va a enloquecer" antes del candado. Nunca solo 🔒 — siempre contexto primero.</div></div>
+      <div class="irae-card E"><div class="irae-letter">E</div><div class="irae-name">Enslavement</div><div class="irae-desc">Solo se activa después de la primera compra. Comandos implantados, universo compartido, fractionation. El fan ya compró — ahora lo convertís en alguien que vuelve solo.</div></div>
+    </div>
+  </div>
+
+  <!-- OPENERS -->
+  <div class="card">
+    <div class="card-title">🚪 Openers (3 tipos)</div>
+    <div id="opener-scripts"></div>
+  </div>
+
+  <!-- RAPPORT -->
+  <div class="card">
+    <div class="card-title">🤝 Fase R — Rapport (primeros 10 mensajes, cero venta)</div>
+    <div id="rapport-scripts"></div>
+  </div>
+
+  <!-- ATTRACTION -->
+  <div class="card">
+    <div class="card-title">🔥 Fase A — Attraction</div>
+    <div id="attraction-scripts"></div>
+  </div>
+
+  <!-- ENSLAVEMENT -->
+  <div class="card">
+    <div class="card-title">⛓️ Fase E — Enslavement (solo después de primera compra)</div>
+    <div id="enslavement-scripts"></div>
+  </div>
+
+  <!-- FETICHES -->
+  <div class="card">
+    <div class="card-title">👠 Scripts por Fetiche</div>
+    <div id="fetish-scripts"></div>
+  </div>
+
+  <!-- DICK RATING -->
+  <div class="card">
+    <div class="card-title">📏 Dick Rating (siempre entre 7.5 y 9.0)</div>
+    <div id="dickrating-scripts"></div>
+  </div>
+
+  <!-- FANS DIFÍCILES -->
+  <div class="card">
+    <div class="card-title">⚡ Fans Difíciles</div>
+    <div id="dificil-scripts"></div>
+  </div>
+</section>
+
+<!-- ==================== 09 DRIP METHOD ==================== -->
+<section class="section" id="drip">
+  <div class="section-header">
+    <div class="section-icon-wrap">💧</div>
+    <div><div class="sec-num">Sección 09</div><div class="sec-title">Drip Method</div></div>
+  </div>
+  <div class="sec-divider"></div>
+
+  <div class="card">
+    <div class="card-title">❓ ¿Qué es el Drip Method?</div>
+    <p>El Drip Method es la estrategia de escalada de precios que aplicás de manera progresiva a lo largo del tiempo. La idea es simple: nunca pedirle a un fan un precio alto de entrada. Primero lo enganchás con algo accesible, construís el hábito de compra, y después cada escalón se siente pequeño en relación al anterior.</p>
+    <p>Para cuando llegás a los precios altos, el fan ya tiene identidad de comprador — siente que es "su Goddess" y que pagar es parte de la dinámica.</p>
+    <div class="price-ladder" style="margin-top:20px;">
+      <div class="price-step"><span class="price-num">$0</span><span class="price-lbl">Sub gratis</span></div>
+      <div class="price-arrow">→</div>
+      <div class="price-step current"><span class="price-num">$9</span><span class="price-lbl">Welcome</span></div>
+      <div class="price-arrow">→</div>
+      <div class="price-step"><span class="price-num">$15</span><span class="price-lbl">2do PPV</span></div>
+      <div class="price-arrow">→</div>
+      <div class="price-step"><span class="price-num">$25</span><span class="price-lbl">x3 veces</span></div>
+      <div class="price-arrow">→</div>
+      <div class="price-step"><span class="price-num">$40</span><span class="price-lbl">Pack/custom</span></div>
+      <div class="price-arrow">→</div>
+      <div class="price-step"><span class="price-num">$60</span><span class="price-lbl">Top ticket</span></div>
+      <div class="price-arrow">→</div>
+      <div class="price-step"><span class="price-num">$0</span><span class="price-lbl">Post-orgasmo</span></div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-title">📋 Cada Escalón Explicado</div>
+    <table class="data-table">
+      <tr><th>Precio</th><th>Qué es</th><th>Qué logra</th></tr>
+      <tr><td><strong>$0</strong></td><td>Suscripción gratis</td><td>Barrera de entrada cero. Máximos fans posibles adentro.</td></tr>
+      <tr><td><strong>$9</strong></td><td>Welcome PPV (3 fotos + video)</td><td>Primera compra — convierte al fan en comprador por primera vez.</td></tr>
+      <tr><td><strong>$15</strong></td><td>Audio JOI corto o foto de pies más explícita</td><td>La resistencia baja porque ya compraron una vez.</td></tr>
+      <tr><td><strong>$25 x3</strong></td><td>Contenido de fetiche específico, CEI, fart fetish, humillación personalizada</td><td>Con 2 compras anteriores, el fan ya se siente parte de la dinámica.</td></tr>
+      <tr><td><strong>$40</strong></td><td>Pack premium o primer custom</td><td>Fan habituado a comprar. "Grabé esto pensando en vos" justifica el precio.</td></tr>
+      <tr><td><strong>$60</strong></td><td>Customs personalizados, sexting extendido, VC</td><td>Solo fans que ya pasaron por los escalones. Nunca a fans nuevos.</td></tr>
+      <tr><td><strong>$0</strong></td><td>Regalo post-orgasmo</td><td>Crea deuda emocional → prepara para la próxima escalera.</td></tr>
+    </table>
+  </div>
+
+  <div class="card">
+    <div class="card-title">📨 Drip en Masivos vs DM</div>
+    <div class="info-box"><strong>Masivos:</strong> Solo $9 y $15. Van a toda la lista y no todos están en el mismo escalón. Los $25+ se trabajan en DM uno a uno.</div>
+    <div class="warning-box"><strong>Excepción:</strong> Los PPV Wave del viernes/sábado noche pueden llegar a $25 porque el contexto de "fin de semana" baja la resistencia de gasto.</div>
+  </div>
+
+  <div class="card">
+    <div class="card-title">⭐ Scripts de Escalada en DM</div>
+    <div id="drip-scripts"></div>
+  </div>
+
+  <div class="card">
+    <div class="card-title">🏆 Regla de Oro</div>
+    <p><strong>Nunca saltar escalones.</strong> Si un fan nuevo pide un custom de $60 el primer día, la respuesta es:</p>
+    <div id="golden-rule-scripts"></div>
+  </div>
+</section>
+
+<!-- ==================== 10 TOP FANS ==================== -->
+<section class="section" id="topfans">
+  <div class="section-header">
+    <div class="section-icon-wrap">⭐</div>
+    <div><div class="sec-num">Sección 10</div><div class="sec-title">Top Fans</div></div>
+  </div>
+  <div class="sec-divider"></div>
+
+  <div class="info-box">Todos tus compradores actuales son orgánicos — sin ningún empuje de tu parte. Con el sistema activo, este dinero se puede multiplicar fácil.</div>
+
+  <div class="card">
+    <div class="card-title">💰 Ranking de Compradores</div>
+    <div class="fans-grid">
+      <div class="fan-row"><div class="fan-rank">1</div><div class="fan-info"><div class="fan-name">Cinturón de Truenos</div><div class="fan-handle">@thunderbeltt</div></div><div><div class="fan-amount">$48.00</div><div class="fan-next">→ Platinum $60</div></div></div>
+      <div class="fan-row"><div class="fan-rank">2</div><div class="fan-info"><div class="fan-name">Fe Pa</div><div class="fan-handle">@u564451991</div></div><div><div class="fan-amount">$40.00</div><div class="fan-next">→ Platinum $60</div></div></div>
+      <div class="fan-row"><div class="fan-rank">3</div><div class="fan-info"><div class="fan-name">Trin</div><div class="fan-handle">@trrrin09</div></div><div><div class="fan-amount">$38.40</div><div class="fan-next">→ Gold $30</div></div></div>
+      <div class="fan-row"><div class="fan-rank">4</div><div class="fan-info"><div class="fan-name">Sri</div><div class="fan-handle">@u565385667</div></div><div><div class="fan-amount">$21.60</div><div class="fan-next">→ Silver $25</div></div></div>
+      <div class="fan-row"><div class="fan-rank">5</div><div class="fan-info"><div class="fan-name">Profundidad de Campo</div><div class="fan-handle">@u465288235</div></div><div><div class="fan-amount">$20.00</div><div class="fan-next">→ Silver $25</div></div></div>
+      <div class="fan-row"><div class="fan-rank">6</div><div class="fan-info"><div class="fan-name">John</div><div class="fan-handle">@u566628122</div></div><div><div class="fan-amount">$20.00</div><div class="fan-next">→ Silver $25</div></div></div>
+      <div class="fan-row"><div class="fan-rank">7</div><div class="fan-info"><div class="fan-name">Voluntad</div><div class="fan-handle">@u498012791</div></div><div><div class="fan-amount">$20.00</div><div class="fan-next">→ Silver $25</div></div></div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-title">👑 Campaña Platinum / Gold / Silver</div>
+    <div id="topfans-scripts"></div>
+  </div>
+
+  <div class="card">
+    <div class="card-title">🏆 Activar el Throne Leaderboard</div>
+    <p>Tenés 3 regalos anónimos y el leaderboard vacío — nadie quiere ser "Anonymous". Eso es una oportunidad: el primer fan que tribute públicamente se lleva la posición #1 y atención exclusiva de la Goddess.</p>
+    <div id="throne-scripts"></div>
+  </div>
+
+  <div class="card">
+    <div class="card-title">📅 Frecuencia de Trabajo con Top Fans</div>
+    <p>Todos los días en el horario de chateo activo (9pm–10:30pm ARG) revisás quién de los top fans abrió masivos ese día y no compró. Ese fan es el target prioritario para un DM personalizado esa noche. No esperar a que ellos escriban primero.</p>
+  </div>
+</section>
+
+<!-- ==================== 11 FEED ==================== -->
+<section class="section" id="feed">
+  <div class="section-header">
+    <div class="section-icon-wrap">📸</div>
+    <div><div class="sec-num">Sección 11</div><div class="sec-title">Feed</div></div>
+  </div>
+  <div class="sec-divider"></div>
+
+  <div class="card">
+    <div class="card-title">📊 Situación Actual</div>
+    <table class="data-table">
+      <tr><th>Métrica</th><th>Valor</th></tr>
+      <tr><td>Posts en 2 meses</td><td>27 (deberían ser ~120)</td></tr>
+      <tr><td>Ventas del feed all-time</td><td><span class="badge badge-red">$0.00</span></td></tr>
+      <tr><td>Post con más vistas</td><td>"From behind..." — 350 vistas, 16 likes</td></tr>
+      <tr><td>Collages de drop en el feed</td><td>2 — hay que sacarlos</td></tr>
+    </table>
+    <div class="info-box" style="margin-top:12px;">El post que más traccionó ("From behind... so you can appreciate my big ass 🍑") confirma que cuerpo + caption provocador funciona. Hay que hacer más y con mejor encuadre de Goddess.</div>
+  </div>
+
+  <div class="card">
+    <div class="card-title">📏 Reglas del Feed</div>
+    <ul class="problem-list">
+      <li class="problem-item"><span class="problem-icon">✅</span><span>2 posts por día, todos los días. Sin excepciones.</span></li>
+      <li class="problem-item"><span class="problem-icon">✅</span><span>Nunca explícito — siempre sugestivo. El feed es la vidriera, el DM es donde se cierra la venta.</span></li>
+      <li class="problem-item"><span class="problem-icon">✅</span><span>Todo el contenido tiene que estar alineado con el personaje de Goddess. Ni un post que suene a GFE genérica.</span></li>
+      <li class="problem-item"><span class="problem-icon">❌</span><span>No subís collages de drop al feed — el feed es solo para tu contenido propio.</span></li>
+      <li class="problem-item"><span class="problem-icon">❌</span><span>No subís contenido de terceras personas.</span></li>
+    </ul>
+  </div>
+
+  <div class="card">
+    <div class="card-title">📸 5 Tipos de Post a Rotar</div>
+    <div id="feed-scripts"></div>
+  </div>
+
+  <div class="card">
+    <div class="card-title">⏰ Timing de Posts</div>
+    <table class="data-table">
+      <tr><th>Post</th><th>Hora ARG</th><th>Por qué</th></tr>
+      <tr><td>Post 1</td><td>10:30am</td><td>El fan que recibió el Wake Up masivo entra al perfil y encuentra contenido fresco.</td></tr>
+      <tr><td>Post 2</td><td>5:30pm</td><td>Calentamiento previo al PPV Wave de noche.</td></tr>
+    </table>
+  </div>
+
+  <div class="card">
+    <div class="card-title">🚀 Plan de Arranque</div>
+    <p>Las primeras 2 semanas hay que ponerse al día con el volumen. La prioridad es publicar los 2 posts diarios sin falta — aunque al principio sean fotos más simples, la consistencia importa más que la producción perfecta.</p>
+    <p>Los 2 collages de drop que tenés en el feed hay que borrarlos — el feed es para contenido tuyo, los drops son tráfico externo. Mezclarlos diluye la identidad del perfil.</p>
+  </div>
+</section>
+
+<!-- ==================== 12 LISTAS ==================== -->
+<section class="section" id="listas">
+  <div class="section-header">
+    <div class="section-icon-wrap">📋</div>
+    <div><div class="sec-num">Sección 12</div><div class="sec-title">Listas</div></div>
+  </div>
+  <div class="sec-divider"></div>
+
+  <div class="warning-box">Hoy no tenés ninguna lista armada — mandás todo a todos sin distinción. Eso significa que un fan que nunca compró recibe el mismo mensaje que el que ya gastó $48.</div>
+
+  <div class="card">
+    <div class="card-title">📋 Listas a Crear Ahora</div>
+    <div class="lists-grid">
+      <div class="list-card" style="border-left-color:#89547a;"><div class="list-name">🔆 HOY</div><div class="list-desc">Fans que compraron o interactuaron ese día. Se limpia todas las noches.</div></div>
+      <div class="list-card" style="border-left-color:#d4a800;"><div class="list-name">⭐ TOP SPENDERS</div><div class="list-desc">Fans que gastaron más de $30 total. Thunderbeltt, Fe Pa y Trin por ahora.</div></div>
+      <div class="list-card" style="border-left-color:#c0392b;"><div class="list-name">👑 DOMINANTE</div><div class="list-desc">Fans que eligieron 1️⃣ en el welcome. Chateo directo, sin tanto calentamiento previo.</div></div>
+      <div class="list-card" style="border-left-color:#ffb997;"><div class="list-name">🐾 GUIADO</div><div class="list-desc">Fans que eligieron 2️⃣ en el welcome. Arrancar más suave en rapport.</div></div>
+      <div class="list-card" style="border-left-color:#1a7a45;"><div class="list-name">💧 DRIP 1</div><div class="list-desc">Completaron el escalón de $9. Siguiente movimiento: $15.</div></div>
+      <div class="list-card" style="border-left-color:#2980b9;"><div class="list-name">💧 DRIP 2</div><div class="list-desc">Completaron el escalón de $15. Siguiente movimiento: $25.</div></div>
+      <div class="list-card" style="border-left-color:#8e44ad;"><div class="list-name">💧 DRIP 3</div><div class="list-desc">Completaron $25 x3. Van directo al $40-$60. Candidatos a customs y VC.</div></div>
+      <div class="list-card" style="border-left-color:#95a5a6;"><div class="list-name">🔇 SILENCIADO</div><div class="list-desc">Fans que abrieron más de 10 mensajes sin comprar. Frecuencia mínima hasta que den señales.</div></div>
+      <div class="list-card" style="border-left-color:#e74c3c;"><div class="list-name">⏳ TIME WASTERS</div><div class="list-desc">2 intentos fallidos de compra consecutivos. No gastar energía de chateo hasta señales reales.</div></div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-title">🔄 Cómo Usarlas en la Práctica</div>
+    <ul class="problem-list">
+      <li class="problem-item"><span class="problem-icon">✅</span><span>Cada vez que un fan compra algo, lo agregás a la lista Drip correspondiente <strong>en ese momento</strong> — no lo dejés para después.</span></li>
+      <li class="problem-item"><span class="problem-icon">✅</span><span>Al final de cada noche revisás la lista HOY, ves quién compró y quién no, y planificás los DMs de seguimiento para mañana.</span></li>
+      <li class="problem-item"><span class="problem-icon">✅</span><span>Los PPV Wave los podés segmentar: $25 solo a fans en Drip 2 o 3, $9 a toda la lista general. Sube mucho la tasa de conversión.</span></li>
+    </ul>
+  </div>
+</section>
+
+<!-- ==================== 13 REGLAS ==================== -->
+<section class="section" id="reglas">
+  <div class="section-header">
+    <div class="section-icon-wrap">📏</div>
+    <div><div class="sec-num">Sección 13</div><div class="sec-title">Reglas</div></div>
+  </div>
+  <div class="sec-divider"></div>
+
+  <div class="info-box">Las reglas cumplen dos funciones: te protegen como creadora y refuerzan el personaje de Goddess. Un fan que acepta tus reglas ya entró en la dinámica de obediencia antes de gastar un peso.</div>
+
+  <div class="rule-section">
+    <div class="rule-cat">📸 Contenido</div>
+    <ul class="rule-list">
+      <li class="rule-item"><span class="rule-dot">▸</span><span>No subís contenido explícito al feed. El feed es siempre sugestivo. Lo explícito va al vault bloqueado o en PPV por DM.</span></li>
+      <li class="rule-item"><span class="rule-dot">▸</span><span>No usás contenido de terceras personas en tu vault. Todo lo que suba tiene que ser tuyo.</span></li>
+      <li class="rule-item"><span class="rule-dot">▸</span><span>No mencionás otras plataformas en los mensajes a fans — solo en bio si corresponde.</span></li>
+      <li class="rule-item"><span class="rule-dot">▸</span><span>No hacés collabs con otras creadoras dentro de tu cuenta sin analizar primero el perfil y la audiencia.</span></li>
+    </ul>
+  </div>
+
+  <div class="rule-section">
+    <div class="rule-cat">👤 Fans</div>
+    <ul class="rule-list">
+      <li class="rule-item"><span class="rule-dot">▸</span><span>No respondés fans maleducados ni entrás en discusiones. Una respuesta fría y silencio — nada más.</span></li>
+      <li class="rule-item"><span class="rule-dot">▸</span><span>No desbloqueás contenido gratis a fans que piden sin comprar.</span></li>
+      <li class="rule-item"><span class="rule-dot">▸</span><span>No hacés VC ni sexting sin pago previo confirmado. Nunca.</span></li>
+      <li class="rule-item"><span class="rule-dot">▸</span><span>Después de 2 intentos fallidos de venta con el mismo fan en el mismo día, parás y lo movés a Silenciado.</span></li>
+    </ul>
+  </div>
+
+  <div class="rule-section">
+    <div class="rule-cat">💰 Precios</div>
+    <ul class="rule-list">
+      <li class="rule-item"><span class="rule-dot">▸</span><span>Nunca bajás precios si un fan pide descuento. La respuesta es siempre: <em>"I understand, pet. Quality has a price. I'll be here when you're ready 👑"</em></span></li>
+      <li class="rule-item"><span class="rule-dot">▸</span><span>No mandás PPV sin contexto antes del candado. Nunca solo 🔒.</span></li>
+      <li class="rule-item"><span class="rule-dot">▸</span><span>El PPV mínimo en DM es $9. No existe nada por menos en mensajes privados.</span></li>
+    </ul>
+  </div>
+
+  <div class="rule-section">
+    <div class="rule-cat">🎬 Customs y VC</div>
+    <ul class="rule-list">
+      <li class="rule-item"><span class="rule-dot">▸</span><span>Los customs arrancan en $40 mínimo y suben según duración y especificidad.</span></li>
+      <li class="rule-item"><span class="rule-dot">▸</span><span>El VC arranca en $60 por 10 minutos.</span></li>
+      <li class="rule-item"><span class="rule-dot">▸</span><span>El sexting por DM mínimo $25 por sesión.</span></li>
+      <li class="rule-item"><span class="rule-dot">▸</span><span>Antes de producir cualquier custom pedís el pago completo. Sin excepciones.</span></li>
+    </ul>
+  </div>
+
+  <div class="rule-section">
+    <div class="rule-cat">💨 Fart Fetish</div>
+    <ul class="rule-list">
+      <li class="rule-item"><span class="rule-dot">▸</span><span>Contenido exclusivo — no va en masivos ni en feed. Solo en DM a fans que lo pidan.</span></li>
+      <li class="rule-item"><span class="rule-dot">▸</span><span>Precio mínimo $20 por audio.</span></li>
+    </ul>
+  </div>
+
+  <div class="rule-section">
+    <div class="rule-cat">📅 Gestión Diaria</div>
+    <ul class="rule-list">
+      <li class="rule-item"><span class="rule-dot">▸</span><span>Revisás métricas todos los domingos: qué masivos convirtieron, qué fans compraron, a quién trabajar la semana siguiente.</span></li>
+      <li class="rule-item"><span class="rule-dot">▸</span><span>Limpiás la lista HOY todas las noches antes de dormir.</span></li>
+      <li class="rule-item"><span class="rule-dot">▸</span><span>Actualizás las listas Drip cada vez que un fan sube de escalón — en el momento, no después.</span></li>
+    </ul>
+  </div>
+</section>
+
+<!-- ==================== 14 MÉTRICAS ==================== -->
+<section class="section" id="metricas">
+  <div class="section-header">
+    <div class="section-icon-wrap">📊</div>
+    <div><div class="sec-num">Sección 14</div><div class="sec-title">Métricas y Proyecciones</div></div>
+  </div>
+  <div class="sec-divider"></div>
+
+  <div class="card">
+    <div class="card-title">📌 KPIs Semanales a Trackear</div>
+    <div class="kpi-grid">
+      <div class="kpi-card"><div class="kpi-label">Apertura de masivos</div><div class="kpi-value">~96/msg</div><div class="kpi-goal">Objetivo: 30% de 321 fans</div></div>
+      <div class="kpi-card"><div class="kpi-label">Conversión masivos</div><div class="kpi-value">0% → 2%</div><div class="kpi-goal">Objetivo mes 1: 2%</div></div>
+      <div class="kpi-card"><div class="kpi-label">Gasto promedio/fan</div><div class="kpi-value">$0.84</div><div class="kpi-goal">Objetivo: $3–5</div></div>
+      <div class="kpi-card"><div class="kpi-label">Nuevos fans/semana</div><div class="kpi-value">~90</div><div class="kpi-goal">Objetivo: 120–150</div></div>
+      <div class="kpi-card"><div class="kpi-label">Posts/semana</div><div class="kpi-value">~3</div><div class="kpi-goal">Objetivo: 14 (2/día)</div></div>
+      <div class="kpi-card"><div class="kpi-label">Audios/semana</div><div class="kpi-value">0</div><div class="kpi-goal">Objetivo: 2–3</div></div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-title">📈 Proyecciones a 3 Meses</div>
+    <div class="proj-grid">
+      <div class="proj-card">
+        <div class="proj-month">Mes 1 — Implementación</div>
+        <div class="proj-amount">$1.500</div>
+        <div class="proj-range">Rango: $1.300–$1.800</div>
+      </div>
+      <div class="proj-card highlight">
+        <div class="proj-month">Mes 2 — Sistema calibrado</div>
+        <div class="proj-amount">$2.700</div>
+        <div class="proj-range">Rango: $2.500–$3.000</div>
+      </div>
+      <div class="proj-card">
+        <div class="proj-month">Mes 3 — Crecimiento</div>
+        <div class="proj-amount">$4.000</div>
+        <div class="proj-range">Rango: $3.500–$4.500</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-title">🏆 Benchmarks de Referencia</div>
+    <table class="data-table">
+      <tr><th>Ranking</th><th>Ingreso mensual</th><th>Estado</th></tr>
+      <tr><td>Top 22%</td><td>~$271/mes</td><td><span class="badge badge-purple">📍 Estás acá hoy</span></td></tr>
+      <tr><td>Top 10%</td><td>~$648/mes</td><td><span class="badge badge-peach">🎯 Objetivo Mes 1</span></td></tr>
+      <tr><td>Top 3%</td><td>~$3.429/mes</td><td><span class="badge badge-green">🎯 Objetivo Mes 2-3</span></td></tr>
+      <tr><td>Top 1%</td><td>~$7.500/mes</td><td><span class="badge badge-green">🎯 Objetivo Mes 4-6</span></td></tr>
+    </table>
+  </div>
+
+  <div class="card">
+    <div class="card-title">📅 Revisión Dominical — 5 Números</div>
+    <p>Todos los domingos antes de planificar la semana revisás estos 5 números:</p>
+    <ul class="problem-list" style="margin-top:12px;">
+      <li class="problem-item"><span class="problem-icon">1️⃣</span><span>Ganancias de la semana vs semana anterior.</span></li>
+      <li class="problem-item"><span class="problem-icon">2️⃣</span><span>Cuántos masivos enviaste y cuántos convirtieron.</span></li>
+      <li class="problem-item"><span class="problem-icon">3️⃣</span><span>Qué fan subió de escalón en el Drip.</span></li>
+      <li class="problem-item"><span class="problem-icon">4️⃣</span><span>Cuántos fans nuevos sumaste.</span></li>
+      <li class="problem-item"><span class="problem-icon">5️⃣</span><span>Qué tipo de contenido generó más aperturas y compras.</span></li>
+    </ul>
+    <div class="info-box" style="margin-top:12px;">Con esos 5 datos ajustás la estrategia de la semana siguiente: qué PPV mandar, a qué fans trabajar en DM y qué contenido priorizar en producción.</div>
+  </div>
+</section>
+
+</main>
+</div>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <strong>TuCuentaOnly</strong> · Review @piscyangoddes · Junio 2026<br>
+  <a href="https://tucuentaof.com">tucuentaof.com</a> · <a href="https://instagram.com/tucuentaonlyf">@tucuentaonlyf</a> · <a href="https://t.me/Tucuentaonly">t.me/Tucuentaonly</a>
+  <br><br>
+  <span style="font-size:10px;">Documento confidencial — uso exclusivo de la creadora. No compartir.</span>
+</footer>
+
+</div><!-- end main-content -->
+
+<!-- MOBILE NAV -->
+<nav class="mobile-nav">
+  <div class="mobile-nav-inner">
+    <a href="#diagnostico" class="mnav-item active" onclick="setActiveMobile(this)"><span class="mnav-icon">🔍</span><span class="mnav-label">Diagnóstico</span></a>
+    <a href="#bio" class="mnav-item" onclick="setActiveMobile(this)"><span class="mnav-icon">📝</span><span class="mnav-label">Bio</span></a>
+    <a href="#welcome" class="mnav-item" onclick="setActiveMobile(this)"><span class="mnav-icon">👋</span><span class="mnav-label">Welcome</span></a>
+    <a href="#vault" class="mnav-item" onclick="setActiveMobile(this)"><span class="mnav-icon">🗄️</span><span class="mnav-label">Vault</span></a>
+    <a href="#drops" class="mnav-item" onclick="setActiveMobile(this)"><span class="mnav-icon">📤</span><span class="mnav-label">Drops</span></a>
+    <a href="#masivos" class="mnav-item" onclick="setActiveMobile(this)"><span class="mnav-icon">📨</span><span class="mnav-label">Masivos</span></a>
+    <a href="#horario" class="mnav-item" onclick="setActiveMobile(this)"><span class="mnav-icon">🕐</span><span class="mnav-label">Horario</span></a>
+    <a href="#scripts" class="mnav-item" onclick="setActiveMobile(this)"><span class="mnav-icon">💬</span><span class="mnav-label">Scripts</span></a>
+    <a href="#drip" class="mnav-item" onclick="setActiveMobile(this)"><span class="mnav-icon">💧</span><span class="mnav-label">Drip</span></a>
+    <a href="#topfans" class="mnav-item" onclick="setActiveMobile(this)"><span class="mnav-icon">⭐</span><span class="mnav-label">Top Fans</span></a>
+    <a href="#feed" class="mnav-item" onclick="setActiveMobile(this)"><span class="mnav-icon">📸</span><span class="mnav-label">Feed</span></a>
+    <a href="#listas" class="mnav-item" onclick="setActiveMobile(this)"><span class="mnav-icon">📋</span><span class="mnav-label">Listas</span></a>
+    <a href="#reglas" class="mnav-item" onclick="setActiveMobile(this)"><span class="mnav-icon">📏</span><span class="mnav-label">Reglas</span></a>
+    <a href="#metricas" class="mnav-item" onclick="setActiveMobile(this)"><span class="mnav-icon">📊</span><span class="mnav-label">Métricas</span></a>
+  </div>
+</nav>
+
+<script>
+// ==================== PASSWORD ====================
+function checkPwd(){
+  const v=document.getElementById('pwd-input').value;
+  const err=document.getElementById('pwd-error');
+  if(v==='Piscyangoddes2026'){
+    document.getElementById('password-screen').style.display='none';
+    document.getElementById('main-content').style.display='block';
+    populateScripts();
+  } else {
+    err.style.display='block';
+    document.getElementById('pwd-input').value='';
+    setTimeout(()=>err.style.display='none',3000);
+  }
+}
+
+// ==================== PROGRESS BAR ====================
+window.addEventListener('scroll',()=>{
+  const el=document.getElementById('progress-bar');
+  const doc=document.documentElement;
+  const pct=(doc.scrollTop/(doc.scrollHeight-doc.clientHeight))*100;
+  el.style.width=pct+'%';
+});
+
+// ==================== NAV ====================
+function setActive(el){
+  document.querySelectorAll('.nav-item').forEach(n=>n.classList.remove('active'));
+  el.classList.add('active');
+}
+function setActiveMobile(el){
+  document.querySelectorAll('.mnav-item').forEach(n=>n.classList.remove('active'));
+  el.classList.add('active');
+}
+
+// ==================== LANG TOGGLE ====================
+function setLang(l){
+  document.body.classList.remove('lang-en','lang-es');
+  document.querySelectorAll('.lang-btn').forEach(b=>b.classList.remove('active'));
+  if(l==='en'){document.body.classList.add('lang-en');document.getElementById('lb-en').classList.add('active');}
+  else if(l==='es'){document.body.classList.add('lang-es');document.getElementById('lb-es').classList.add('active');}
+  else{document.getElementById('lb-both').classList.add('active');}
+}
+
+// ==================== BLOCK TABS ====================
+function showBlock(id,btn){
+  document.querySelectorAll('.block-content').forEach(b=>b.classList.remove('active'));
+  document.querySelectorAll('.block-tab').forEach(b=>b.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  btn.classList.add('active');
+}
+
+// ==================== COPY ====================
+function copyText(btn,text){
+  navigator.clipboard.writeText(text).then(()=>{
+    const orig=btn.textContent;
+    btn.textContent='✅ Copiado';
+    btn.classList.add('copied');
+    setTimeout(()=>{btn.textContent=orig;btn.classList.remove('copied');},2000);
+  });
+}
+function copyEl(btn,id){
+  const text=document.getElementById(id).value;
+  copyText(btn,text);
+}
+
+// ==================== SCRIPT BUILDER ====================
+function makeScript(label,tag,en,es){
+  return `<div class="script-card">
+    <div class="script-header"><span class="script-label">${label}</span>${tag?`<span class="script-tag">${tag}</span>`:''}</div>
+    <div class="script-body">
+      <div class="lang-block lang-en"><div class="lang-flag">🇬🇧 EN</div><div class="script-text">${en}</div><button class="copy-btn" onclick="copyText(this,'${en.replace(/'/g,"\\'")}')">Copiar</button></div>
+      <div class="lang-block lang-es"><div class="lang-flag">🇦🇷 ES</div><div class="script-text">${es}</div><button class="copy-btn" onclick="copyText(this,'${es.replace(/'/g,"\\'")}')">Copiar</button></div>
+    </div>
+  </div>`;
+}
+
+function makeScriptEN(label,tag,en){
+  return `<div class="script-card">
+    <div class="script-header"><span class="script-label">${label}</span>${tag?`<span class="script-tag">${tag}</span>`:''}</div>
+    <div class="script-body">
+      <div class="lang-block"><div class="lang-flag">🇬🇧 EN</div><div class="script-text">${en}</div><button class="copy-btn" onclick="copyText(this,'${en.replace(/'/g,"\\'")}')">Copiar</button></div>
+    </div>
+  </div>`;
+}
+
+function populateScripts(){
+
+  // MASIVOS BLOQUE 1
+  const b1=[
+    'Your Goddess is awake. Are you thinking about me already? 👑',
+    'Good morning, pet. Did you dream about me? 🐾',
+    'A new day begins... and I\'m already in your head, aren\'t I? 😈',
+    'Wake up. Your Goddess has plans for you today 👑🔒',
+    'Morning, little one. You know what today needs? Devotion 💋',
+    'I woke up feeling powerful today. Is that because of you? 👀',
+    'Before you start your day... think about what you\'d do to please me 🐾',
+    'Rise and obey, pet. Your Goddess is watching 👑',
+    'Does your morning start better when I\'m in it? Tell me 😈',
+    'You\'re going to spend the whole day thinking about me. Admit it 💋👑'
+  ];
+  const b1es=[
+    'Tu Diosa está despierta. ¿Ya estás pensando en mí? 👑',
+    'Buenos días, pet. ¿Soñaste conmigo? 🐾',
+    'Empieza un nuevo día... y ya estoy en tu cabeza, ¿no? 😈',
+    'Despertá. Tu Diosa tiene planes para vos hoy 👑🔒',
+    'Buenos días, pequeño. ¿Sabés qué necesita este día? Devoción 💋',
+    'Me desperté sintiéndome poderosa hoy. ¿Es por vos? 👀',
+    'Antes de empezar tu día... pensá en qué harías para complacerme 🐾',
+    'Levantate y obedecé, pet. Tu Diosa está mirando 👑',
+    '¿Tu mañana empieza mejor cuando estoy en ella? Decime 😈',
+    'Vas a pasar todo el día pensando en mí. Admitilo 💋👑'
+  ];
+  let h1='';
+  b1.forEach((msg,i)=>{h1+=makeScript(`Wake Up #${i+1}`,'TEXTO',msg,b1es[i]);});
+  document.getElementById('b1-scripts').innerHTML=h1;
+
+  // MASIVOS BLOQUE 2 - Fotos
+  const b2f=[
+    ['Con foto — lencería','Rate my outfit today 🔥 or 😈?','¿Cómo le ponés nota a mi outfit hoy? 🔥 o 😈?'],
+    ['Con foto — pose sugestiva','What do you think I\'m hiding under this? 👀','¿Qué creés que estoy escondiendo debajo de esto? 👀'],
+    ['Con foto — pies con tacos','These feet deserve worship. Agree? 🐾👠','Estos pies merecen adoración. ¿De acuerdo? 🐾👠'],
+    ['Con foto — mirada dominante','I caught you staring... 😏','Te agarré mirando... 😏'],
+    ['Con foto — lencería','What would you do if you were here right now? 😈','¿Qué harías si estuvieras acá ahora mismo? 😈'],
+    ['Con foto — pose desde arriba','My favorite view... from above 👑','Mi vista favorita... desde arriba 👑'],
+    ['Con foto — mirada intensa','Does this make you nervous, pet? 💋','¿Esto te pone nervioso, pet? 💋'],
+    ['Con foto — pies y cola','Feet or ass — which one owns you? 🍑👠','¿Pies o cola — cuál te tiene en su poder? 🍑👠'],
+    ['Con foto — arnés','I\'m in a commanding mood today... lucky you 😈','Hoy tengo humor de dar órdenes... qué suerte la tuya 😈'],
+    ['Con foto — pies','What fetish of mine drives you the most crazy? 🐾','¿Cuál de mis fetiches te vuelve más loco? 🐾']
+  ];
+  const b2p=[
+    ['Poll','What are you today? A) Your obedient pet 🐾 / B) Still resisting 😈','¿Qué sos hoy? A) Tu pet obediente 🐾 / B) Todavía resistiendo 😈'],
+    ['Poll','What would you tribute first? A) My feet 👠 / B) My ass 🍑','¿Qué tributarías primero? A) Mis pies 👠 / B) Mi cola 🍑'],
+    ['Poll','You prefer when I\'m... A) Strict and demanding 👑 / B) Teasing and cruel 😈','Preferís cuando soy... A) Estricta y exigente 👑 / B) Provocadora y cruel 😈'],
+    ['Poll','Your Goddess sends you a task. You... A) Obey immediately 🐾 / B) Beg for mercy 🙏','Tu Diosa te manda una tarea. Vos... A) Obedecés de inmediato 🐾 / B) Suplicás piedad 🙏'],
+    ['Poll','What do you want from me tonight? A) JOI 🔥 / B) Humiliation 😈 / C) Feet worship 👠','¿Qué querés de mí esta noche? A) JOI 🔥 / B) Humillación 😈 / C) Adoración de pies 👠'],
+    ['Poll','Rate your obedience today: A) Perfect pet 🐾 / B) Needs training 😈','Calificá tu obediencia hoy: A) Pet perfecto 🐾 / B) Necesita entrenamiento 😈'],
+    ['Poll','How long have you been thinking about me today? A) All day 👑 / B) I can\'t stop 😈','¿Cuánto tiempo llevas pensando en mí hoy? A) Todo el día 👑 / B) No puedo parar 😈'],
+    ['Poll','Would you wear a collar if I asked? A) Yes, Goddess 🐾 / B) Not yet... 👀','¿Usarías un collar si te lo pidiera? A) Sí, Diosa 🐾 / B) Todavía no... 👀'],
+    ['Poll','Your biggest fetish? A) Feet 👠 / B) Humiliation 😈 / C) Control 👑 / D) Other 🔒','Tu mayor fetiche? A) Pies 👠 / B) Humillación 😈 / C) Control 👑 / D) Otro 🔒'],
+    ['Poll','Do you deserve a reward today? A) Yes, I\'ve been good 🐾 / B) No, punish me 😈','¿Merecés un premio hoy? A) Sí, me porté bien 🐾 / B) No, castigame 😈']
+  ];
+  let h2='';
+  b2f.forEach(([lbl,en,es])=>{h2+=makeScript(lbl,'📸 CON FOTO',en,es);});
+  b2p.forEach(([lbl,en,es])=>{h2+=makeScript(lbl,'📊 POLL',en,es);});
+  document.getElementById('b2-scripts').innerHTML=h2;
+
+  // MASIVOS BLOQUE 3 - PPV Wave
+  const b3=[
+    ['PPV #1','$9 — foto pies con tacos','I filmed my feet in those new heels for you. Can you handle it? 🔒','Filmé mis pies con esos tacos nuevos para vos. ¿Podés con esto? 🔒'],
+    ['PPV #2','$9 — audio JOI','Close your eyes. I recorded something just for you... listen 🔒','Cerrá los ojos. Grabé algo especialmente para vos... escuchá 🔒'],
+    ['PPV #3','$15 — video dominante','This is what total control looks like. Unlock and see 🔒','Así se ve el control total. Desbloqueá y mirá 🔒'],
+    ['PPV #4','$9 — video corto','I was thinking about you when I made this. Don\'t waste it 🔒','Estaba pensando en vos cuando hice esto. No lo desperdicies 🔒'],
+    ['PPV #5','$15 — audio instrucciones','Your Goddess has a task for tonight. Instructions inside 🔒','Tu Diosa tiene una tarea para esta noche. Instrucciones adentro 🔒'],
+    ['PPV #6','$9 — foto pies','These feet have been waiting all day for your worship 🔒','Estos pies estuvieron esperando todo el día tu adoración 🔒'],
+    ['PPV #7','$15 — audio CEI','I want to hear you follow my voice. Can you obey? 🔒','Quiero escucharte seguir mi voz. ¿Podés obedecer? 🔒'],
+    ['PPV #8','$9 — foto/video','My most commanding content yet. Prove you deserve it 🔒','Mi contenido más dominante hasta ahora. Probá que te lo merecés 🔒'],
+    ['PPV #9','$15 — video especial','Something special for my most devoted pets tonight 🔒','Algo especial para mis pets más devotos esta noche 🔒'],
+    ['PPV #10','$9 — foto','You\'ve been thinking about this all day. Now unlock it 🔒','Estuviste pensando en esto todo el día. Ahora desbloquealo 🔒']
+  ];
+  let h3='';
+  b3.forEach(([lbl,tag,en,es])=>{h3+=makeScript(lbl,tag,en,es);});
+  document.getElementById('b3-scripts').innerHTML=h3;
+
+  // MASIVOS BLOQUE 4
+  const b4=[
+    ['Goodnight #1','TEXTO','Going to sleep soon... did you think about me today? 🌙','Me voy a dormir pronto... ¿pensaste en mí hoy? 🌙'],
+    ['Goodnight #2','TEXTO','Goodnight, pet. Dream about your Goddess 🐾💋','Buenas noches, pet. Soñá con tu Diosa 🐾💋'],
+    ['Goodnight #3','TEXTO','Before I sleep... tell me one thing you\'d sacrifice to please me 👑🌙','Antes de dormir... decime una cosa que sacrificarías para complacerme 👑🌙'],
+    ['Goodnight #4','TEXTO','Goodnight. Tomorrow I have something special for my most devoted pets 👀🔒','Buenas noches. Mañana tengo algo especial para mis pets más devotos 👀🔒'],
+    ['Goodnight #5','TEXTO','Lights off... but I\'m still in your head, aren\'t I? 👑💋','Apago las luces... pero todavía estoy en tu cabeza, ¿no? 👑💋'],
+    ['Goodnight #6','TEXTO','Sleep well, little one. Tomorrow your training continues 🐾🌙','Dormí bien, pequeño. Mañana tu entrenamiento continúa 🐾🌙'],
+    ['Goodnight #7','TEXTO','Before bed... what\'s the one thing you wish you could offer me? 😈','Antes de dormir... ¿cuál es la única cosa que desearías poder ofrecerme? 😈'],
+    ['Goodnight #8','TEXTO','Goodnight from your Goddess. Devotion doesn\'t sleep 👑🌙','Buenas noches de tu Diosa. La devoción no duerme 👑🌙'],
+    ['Goodnight #9','TEXTO','Sweet dreams, pet. I\'ll be watching 👁️😈','Dulces sueños, pet. Voy a estar mirando 👁️😈'],
+    ['Goodnight #10','$9 — audio voz suave','I recorded a little something to send you to sleep... 🌙🔒','Grabé algo especial para mandarte a dormir... 🌙🔒']
+  ];
+  let h4='';
+  b4.forEach(([lbl,tag,en,es])=>{h4+=makeScript(lbl,tag,en,es);});
+  document.getElementById('b4-scripts').innerHTML=h4;
+
+  // OPENERS
+  let op='';
+  op+=makeScript('Opener 1','Fan elige 1️⃣ — ya sabe obedecer',
+    'Mmmm, a pet who already knows his place. I like that 😈 Tell me... how long have you been waiting for a Goddess like me? 👑',
+    'Mmmm, un pet que ya sabe cuál es su lugar. Me gusta 😈 Decime... ¿cuánto tiempo estuviste esperando una Diosa como yo? 👑');
+  op+=makeScript('Opener 2','Fan elige 2️⃣ — necesita guía',
+    'Don\'t worry, little one. Your Goddess will teach you everything you need to know 🐾 But first... tell me your name',
+    'No te preocupes, pequeño. Tu Diosa te va a enseñar todo lo que necesitás saber 🐾 Pero primero... decime tu nombre');
+  op+=makeScript('Opener 3','Fan escribe primero',
+    'Well, look who couldn\'t wait 😏 Tell me... what brought you here? What are you really looking for? 👑',
+    'Mirá quién no pudo esperar 😏 Decime... ¿qué te trajo acá? ¿Qué estás buscando realmente? 👑');
+  document.getElementById('opener-scripts').innerHTML=op;
+
+  // RAPPORT
+  let rp='';
+  rp+=makeScript('Verificar timezone','Siempre en los primeros mensajes',
+    'Where are you from, pet? I want to know what time it is when you\'re thinking about me 😈',
+    '¿De dónde sos, pet? Quiero saber qué hora es cuando estás pensando en mí 😈');
+  rp+=makeScript('Identificar fetiche #1','',
+    'Tell me something you\'ve never been able to tell anyone else 🐾',
+    'Contame algo que nunca pudiste decirle a nadie 🐾');
+  rp+=makeScript('Identificar fetiche #2','',
+    'What brought you to a Goddess like me? Feet? Control? Humiliation? Something else? 👀',
+    '¿Qué te trajo a una Diosa como yo? ¿Pies? ¿Control? ¿Humillación? ¿Otra cosa? 👀');
+  rp+=makeScript('Barnum #1','',
+    'I can tell you think too much... until someone gives you something better to focus on 😈',
+    'Puedo ver que pensás demasiado... hasta que alguien te da algo mejor en qué concentrarte 😈');
+  rp+=makeScript('Barnum #2','',
+    'You seem like someone who needs structure. Someone to tell you exactly what to do 🐾',
+    'Parecés alguien que necesita estructura. Alguien que te diga exactamente qué hacer 🐾');
+  rp+=makeScript('Barnum #3','',
+    'There\'s something about you that made me want to keep your attention... and I always get what I want 👑',
+    'Hay algo en vos que me hizo querer retener tu atención... y siempre consigo lo que quiero 👑');
+  rp+=makeScript('Conexión #1','',
+    'I don\'t open up like this with everyone. But something about you caught my attention 💋',
+    'No me abro así con cualquiera. Pero algo en vos llamó mi atención 💋');
+  rp+=makeScript('Conexión #2','',
+    'Most men who come here just want content. You feel different. Let\'s see if I\'m right 👑',
+    'La mayoría de los que vienen acá solo quieren contenido. Vos se sentís diferente. Veamos si tengo razón 👑');
+  document.getElementById('rapport-scripts').innerHTML=rp;
+
+  // ATTRACTION
+  let at='';
+  at+=makeScript('Teasing #1','',
+    'I\'ve been thinking about giving you a specific task... do you think you\'re ready? 😏',
+    'Estuve pensando en darte una tarea específica... ¿creés que estás listo? 😏');
+  at+=makeScript('Teasing #2','',
+    'I made something this week that I think you specifically would lose your mind over 🔒',
+    'Hice algo esta semana que creo que específicamente a vos te va a volver loco 🔒');
+  at+=makeScript('Pre-frame de compra #1','',
+    'I filmed something yesterday that made me think of this conversation... want to see? 🔒',
+    'Filmé algo ayer que me hizo pensar en esta conversación... ¿querés ver? 🔒');
+  at+=makeScript('Pre-frame de compra #2','',
+    'I have a voice note I recorded for pets like you. It\'s locked but I think you need it 🎙️🔒',
+    'Tengo una nota de voz que grabé para pets como vos. Está bloqueada pero creo que la necesitás 🎙️🔒');
+  at+=makeScript('Tacos del Throne','Referencia al regalo — activa a otros fans',
+    'These are the heels my pet gifted me... I took some photos in them. Unlock them 👠🔒',
+    'Estos son los tacos que me regaló mi pet... me saqué fotos con ellos. Desbloqueálos 👠🔒');
+  document.getElementById('attraction-scripts').innerHTML=at;
+
+  // ENSLAVEMENT
+  let en='';
+  en+=makeScript('Comando implantado #1','',
+    'Every time you hear my voice, you\'ll feel that pull... like something clicking into place 👑',
+    'Cada vez que escuchés mi voz, vas a sentir ese impulso... como algo encajando en su lugar 👑');
+  en+=makeScript('Comando implantado #2','',
+    'You\'re going to think about this conversation at the most random moments. And you\'ll smile 😈',
+    'Vas a pensar en esta conversación en los momentos más aleatorios. Y vas a sonreír 😈');
+  en+=makeScript('Universo compartido #1','',
+    'This is our world now. No one outside understands what happens between us 🐾',
+    'Este es nuestro mundo ahora. Nadie afuera entiende lo que pasa entre nosotros 🐾');
+  en+=makeScript('Universo compartido #2','',
+    'You\'re not just a fan anymore. You know that, right? 👑',
+    'Ya no sos solo un fan. Lo sabés, ¿no? 👑');
+  en+=makeScript('Fractionation','Momento íntimo → volver a dominación',
+    'Sometimes I wonder if anyone really sees me for who I am... do you? 💋 [esperar respuesta] ...But then I remember. I don\'t need to be seen. I need to be obeyed 😈👑',
+    'A veces me pregunto si alguien realmente me ve como soy... ¿vos me ves? 💋 [esperar respuesta] ...Pero después recuerdo. No necesito que me vean. Necesito que me obedezcan 😈👑');
+  document.getElementById('enslavement-scripts').innerHTML=en;
+
+  // FETICHES
+  let fe='';
+  fe+=makeScript('Feet Worship — opener','',
+    'You like my feet, don\'t you? 👠 Tell me exactly what you\'d do if they were in front of you right now',
+    'Te gustan mis pies, ¿no? 👠 Decime exactamente qué harías si los tuvieras enfrente ahora mismo');
+  fe+=makeScript('Feet Worship — upsell','$9 — después de que responde',
+    'Mmmm. Then you need to see what I filmed today. These heels, these soles... all for pets like you 🔒',
+    'Mmmm. Entonces necesitás ver lo que filmé hoy. Estos tacos, estas plantas... todo para pets como vos 🔒');
+  fe+=makeScript('Findom / Tributo #1','',
+    'Prove your devotion isn\'t just words, pet. A tribute says more than any message 💳👑',
+    'Probá que tu devoción no son solo palabras, pet. Un tributo dice más que cualquier mensaje 💳👑');
+  fe+=makeScript('Findom / Throne','Activar leaderboard',
+    'The leaderboard is empty. The first name there gets something very special from me 🏆',
+    'El leaderboard está vacío. El primer nombre ahí recibe algo muy especial de mi parte 🏆');
+  fe+=makeScript('SPH — opener','',
+    'Oh really? Tell me more... I love knowing exactly what I\'m working with 😈',
+    '¿Ah sí? Contame más... me encanta saber exactamente con qué estoy trabajando 😈');
+  fe+=makeScript('SPH — respuesta','Después de que comparte',
+    'Cute. Honestly? It suits you. A big one would make you too confident and you need to stay humble for me 👑😂',
+    'Qué tierno. ¿La verdad? Te queda. Uno grande te haría demasiado confiado y necesitás mantenerte humilde para mí 👑😂');
+  fe+=makeScript('Fart Fetish — upsell','$20 — solo si el fan lo inicia',
+    'Oh that\'s actually one of my specialties 😈 I have exclusive audios for that... not something I share with everyone. Interested? 🔒',
+    'Oh esa es una de mis especialidades en realidad 😈 Tengo audios exclusivos para eso... no es algo que comparta con cualquiera. ¿Te interesa? 🔒');
+  document.getElementById('fetish-scripts').innerHTML=fe;
+
+  // DICK RATING
+  let dr='';
+  dr+=makeScript('Solicitar rating','',
+    'Send it. I\'ll be honest — but I\'m always fair 😈',
+    'Mandalo. Voy a ser honesta — pero siempre soy justa 😈');
+  dr+=makeScript('Respuesta — circuncidado limpio','7.5 a 9.0 siempre',
+    'Clean, presentable, 8/10. Your Goddess approves 👑',
+    'Limpio, presentable, 8/10. Tu Diosa aprueba 👑');
+  dr+=makeScript('Respuesta — con vello','',
+    'A little wild... 7.5/10. Clean up for me next time 😈',
+    'Un poco salvaje... 7.5/10. La próxima depilate para mí 😈');
+  dr+=makeScript('Respuesta — afeitado','',
+    'I like when my pets make an effort. 8.5/10 💋',
+    'Me gusta cuando mis pets se esfuerzan. 8.5/10 💋');
+  document.getElementById('dickrating-scripts').innerHTML=dr;
+
+  // FANS DIFÍCILES
+  let dif='';
+  dif+=`<div class="info-box"><strong>Time wasters</strong> (2 intentos fallidos): No bloquear. Bajar la frecuencia a 1 respuesta cada 2-3 mensajes suyos. Moverlos a la lista Silenciado. La escasez de atención de la Goddess convierte mejor que el seguimiento.</div>`;
+  dif+=makeScript('Fan maleducado — respuesta única','Silencio después',
+    'I don\'t entertain that energy, pet. Come back when you\'re ready to be respectful 👑',
+    'No tolero esa energía, pet. Volvé cuando estés listo para ser respetuoso 👑');
+  document.getElementById('dificil-scripts').innerHTML=dif;
+
+  // DRIP SCRIPTS
+  let drip='';
+  drip+=makeScript('$9 — Primer escalón','',
+    'I have something small but powerful for you... just $9. It\'s the beginning of your training 🔒',
+    'Tengo algo pequeño pero poderoso para vos... solo $9. Es el comienzo de tu entrenamiento 🔒');
+  drip+=makeScript('$15 — Segundo escalón','',
+    'You handled that well. Now I want to push you further. This one\'s $15 and it\'s more intense 🔒',
+    'Lo manejaste bien. Ahora quiero llevarte más lejos. Este es $15 y es más intenso 🔒');
+  drip+=makeScript('$25 — Tercer escalón (x3)','',
+    'Your Goddess doesn\'t give this to everyone. $25 and it\'s yours 🔒',
+    'Tu Diosa no le da esto a cualquiera. $25 y es tuyo 🔒');
+  drip+=makeScript('$35 — Cuarto escalón','',
+    'I made this thinking specifically about you. $35. Don\'t make me wait 👑🔒',
+    'Hice esto pensando específicamente en vos. $35. No me hagas esperar 👑🔒');
+  drip+=makeScript('$0 — Post-orgasmo','Crea deuda emocional',
+    'Good boy 🐾 This one\'s free. You earned it tonight 💋',
+    'Buen chico 🐾 Este es gratis. Te lo ganaste esta noche 💋');
+  document.getElementById('drip-scripts').innerHTML=drip;
+
+  // GOLDEN RULE
+  let gr='';
+  gr+=makeScript('Fan pide custom de $60 el primer día','',
+    'I love that energy, pet 😈 But first... let\'s start at the beginning. Unlock this and show me you\'re serious 🔒 [$9]',
+    'Me encanta esa energía, pet 😈 Pero primero... empecemos desde el principio. Desbloqueá esto y mostrame que hablás en serio 🔒 [$9]');
+  document.getElementById('golden-rule-scripts').innerHTML=gr;
+
+  // TOP FANS SCRIPTS
+  let tf='';
+  tf+=makeScript('PLATINUM — $60','Para thunderbeltt y Fe Pa',
+    'I\'ve been thinking about you specifically, pet. You\'re one of the very few I trust with something like this. I made a custom just for my Platinum pets... $60 and it\'s yours. No one else gets this 👑🔒',
+    'Estuve pensando específicamente en vos, pet. Sos uno de los pocos en los que confío para algo así. Hice un custom solo para mis pets Platinum... $60 y es tuyo. Nadie más recibe esto 👑🔒');
+  tf+=makeScript('GOLD — $30','Para Trin',
+    'You\'ve earned something special from your Goddess today 😈 This is for my Gold pets only — the ones who\'ve proven their devotion. $30 and it\'s waiting for you 🔒',
+    'Hoy te ganaste algo especial de tu Diosa 😈 Esto es solo para mis pets Gold — los que demostraron su devoción. $30 y te está esperando 🔒');
+  tf+=makeScript('SILVER — $15','Para Sri, Profundidad de campo, John, Voluntad',
+    'I see you, pet. You\'ve been loyal and your Goddess doesn\'t forget that 🐾 I have something for my Silver pets today... $15 and it\'s yours 🔒',
+    'Te veo, pet. Fuiste leal y tu Diosa no olvida eso 🐾 Tengo algo para mis pets Silver hoy... $15 y es tuyo 🔒');
+  document.getElementById('topfans-scripts').innerHTML=tf;
+
+  // THRONE SCRIPT
+  let tr='';
+  tr+=makeScript('Throne — activar leaderboard','DM a thunderbeltt primero',
+    'I have a leaderboard on my Throne and the #1 spot is waiting for someone worthy. The pet who gets there first gets something very special from me... something I don\'t offer to anyone else 👑 Are you that pet? 🏆',
+    'Tengo un leaderboard en mi Throne y el puesto #1 está esperando a alguien digno. El pet que llegue primero recibe algo muy especial de mi parte... algo que no le ofrezco a nadie más 👑 ¿Sos ese pet? 🏆');
+  document.getElementById('throne-scripts').innerHTML=tr;
+
+  // FEED SCRIPTS
+  let fd='';
+  fd+=`<div style="margin-bottom:12px;"><strong style="font-size:13px;color:var(--purple);">Tipo 1 — Cuerpo + caption dominante</strong></div>`;
+  const f1=[
+    ['Caption de cuerpo #1','From behind... so you can appreciate what you\'ll never have unless you earn it 🍑👑','De atrás... para que aprecies lo que nunca vas a tener a menos que te lo ganes 🍑👑'],
+    ['Caption de cuerpo #2','I dressed up for myself today. But you can look 😈','Hoy me vestí para mí. Pero podés mirar 😈'],
+    ['Caption de cuerpo #3','This body is a privilege, not a right 👑','Este cuerpo es un privilegio, no un derecho 👑']
+  ];
+  f1.forEach(([l,en,es])=>{fd+=makeScript(l,'📸 TIPO 1',en,es);});
+
+  fd+=`<div style="margin:16px 0 12px;"><strong style="font-size:13px;color:var(--purple);">Tipo 2 — Pies / Worship</strong></div>`;
+  const f2=[
+    ['Caption pies #1','Tell me what you\'d do with these 👠😈','Decime qué harías con estos 👠😈'],
+    ['Caption pies #2','These feet have been worshipped. Have yours earned the right? 🐾','Estos pies fueron adorados. ¿Los tuyos se ganaron el derecho? 🐾'],
+    ['Caption pies con tacos Throne','New heels. Same rules. Worship or leave 👠👑','Tacos nuevos. Mismas reglas. Adorás o te vas 👠👑']
+  ];
+  f2.forEach(([l,en,es])=>{fd+=makeScript(l,'🦶 TIPO 2',en,es);});
+
+  fd+=`<div style="margin:16px 0 12px;"><strong style="font-size:13px;color:var(--purple);">Tipo 3 — Mirada / Actitud Dominante</strong></div>`;
+  const f3=[
+    ['Caption mirada #1','I know exactly what you\'re thinking right now 😈','Sé exactamente en qué estás pensando ahora mismo 😈'],
+    ['Caption mirada #2','You came back. I knew you would 👑','Volviste. Sabía que ibas a volver 👑'],
+    ['Caption mirada #3','The face you see right before I take control 😏','La cara que ves justo antes de que tome el control 😏']
+  ];
+  f3.forEach(([l,en,es])=>{fd+=makeScript(l,'👁️ TIPO 3',en,es);});
+
+  fd+=`<div style="margin:16px 0 12px;"><strong style="font-size:13px;color:var(--purple);">Tipo 4 — Teaser de Contenido Bloqueado</strong></div>`;
+  const f4=[
+    ['Teaser DM #1','What I filmed last night is not for everyone. Message me if you think you can handle it 🔒','Lo que filmé anoche no es para cualquiera. Escribime si creés que podés manejarlo 🔒'],
+    ['Teaser DM #2','I recorded something this morning that made even me blush... 👀 Ask me what it is','Grabé algo esta mañana que hasta a mí me hizo sonrojar... 👀 Preguntame qué es'],
+    ['Teaser DM #3','Some of my pets already know what happened yesterday. The rest... well 😈','Algunos de mis pets ya saben qué pasó ayer. El resto... bueno 😈']
+  ];
+  f4.forEach(([l,en,es])=>{fd+=makeScript(l,'🔒 TIPO 4',en,es);});
+
+  fd+=`<div style="margin:16px 0 12px;"><strong style="font-size:13px;color:var(--purple);">Tipo 5 — Throne / Tributos</strong></div>`;
+  const f5=[
+    ['Throne #1','Someone sent me a gift today 🎁 My Goddess list keeps growing... are you on it? 👑','Alguien me mandó un regalo hoy 🎁 Mi lista de Goddess sigue creciendo... ¿estás en ella? 👑'],
+    ['Throne #2','My pets know how to treat their Goddess 💋 The leaderboard is waiting for brave ones 🏆','Mis pets saben cómo tratar a su Diosa 💋 El leaderboard espera a los valientes 🏆']
+  ];
+  f5.forEach(([l,en,es])=>{fd+=makeScript(l,'🎁 TIPO 5',en,es);});
+
+  document.getElementById('feed-scripts').innerHTML=fd;
+}
+</script>
+</body>
+</html>
